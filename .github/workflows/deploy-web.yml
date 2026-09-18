@@ -1,0 +1,63 @@
+name: Deploy Web (Laravel) to Azure Container Apps
+
+# CATATAN MONOREPO:
+# File ini diasumsikan berada di <root-repo>/.github/workflows/, dengan
+# folder "web" ADALAH root repo Git kamu (terpisah dari api/model).
+#
+# Kalau nanti kamu satukan web+api+model jadi SATU repo (root = folder
+# skripsi-indobert), pindahkan folder ".github" ini ke root repo tsb, lalu:
+#   1. Tambahkan `paths: ["web/**"]` di bawah `on.push` supaya workflow ini
+#      hanya jalan saat ada perubahan di folder web.
+#   2. Tambahkan `working-directory: web` di setiap step `run:` di bawah.
+#   3. Ubah `docker build .` menjadi `docker build ./web -f web/Dockerfile`.
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch: {}
+
+env:
+  RESOURCE_GROUP: rg-sipeka
+  ACR_NAME: acrsipeka
+  ACR_LOGIN_SERVER: acrsipeka.azurecr.io
+  CONTAINERAPP_NAME: web-sipeka   # TODO: sesuaikan jika nama container app web berbeda
+  IMAGE_NAME: sipeka-web
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Login ke Azure
+        uses: azure/login@v2
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Login Docker ke Azure Container Registry
+        run: az acr login --name ${{ env.ACR_NAME }}
+
+      - name: Tentukan tag image (short SHA commit)
+        id: vars
+        run: echo "tag=$(echo "$GITHUB_SHA" | cut -c1-7)" >> "$GITHUB_OUTPUT"
+
+      - name: Build & push image
+        run: |
+          IMAGE="${{ env.ACR_LOGIN_SERVER }}/${{ env.IMAGE_NAME }}:${{ steps.vars.outputs.tag }}"
+          LATEST="${{ env.ACR_LOGIN_SERVER }}/${{ env.IMAGE_NAME }}:latest"
+          docker build -t "$IMAGE" -t "$LATEST" .
+          docker push "$IMAGE"
+          docker push "$LATEST"
+
+      - name: Deploy revisi baru ke Container App
+        run: |
+          IMAGE="${{ env.ACR_LOGIN_SERVER }}/${{ env.IMAGE_NAME }}:${{ steps.vars.outputs.tag }}"
+          az containerapp update \
+            --name ${{ env.CONTAINERAPP_NAME }} \
+            --resource-group ${{ env.RESOURCE_GROUP }} \
+            --image "$IMAGE"
+
+      - name: Logout Azure
+        if: always()
+        run: az logout
