@@ -1,58 +1,95 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+# SiPeka — Sistem Skrining Risiko Kecemasan Mahasiswa
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+![SiPeka Dashboard](public/images/logo_stikom.png)
 
-## About Laravel
+SiPeka adalah aplikasi berbasis web untuk mendeteksi secara dini risiko kecemasan pada mahasiswa STIKOM Yos Sudarso Purwokerto. Sistem ini dikembangkan sebagai bagian dari proyek skripsi (tugas akhir), dengan menggabungkan instrumen psikologis klinis dan kecerdasan buatan.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Aplikasi ini menggunakan perpaduan **HARS (Hamilton Anxiety Rating Scale)** untuk pengukuran objektif dan **IndoBERT** (Natural Language Processing) untuk menganalisis emosi dari teks curhatan (naratif) berbahasa Indonesia.
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+---
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+## ✨ Fitur Utama
 
-## Learning Laravel
+- **Autentikasi Terbatas (Google OAuth):** Login mahasiswa terintegrasi penuh dengan akun Google kampus (`@student.stikomyos.ac.id`), memastikan hanya mahasiswa aktif yang dapat mengakses sistem tanpa perlu mendaftar manual.
+- **Analisis Emosi Berbasis AI:** Sistem memproses teks keluhan secara *real-time* ke server *inference* IndoBERT (dihosting terpisah di Azure) untuk mendeteksi emosi dominan (seperti *Fear*, *Anger*, *Sadness*).
+- **Validasi Kuesioner Klinis (HARS):** 14 indikator kecemasan yang diadopsi dari standar internasional dan telah divalidasi oleh psikolog klinis.
+- **Privasi & Keamanan Tingkat Tinggi:** Data naratif (curhatan) mahasiswa dienkripsi di *database* menggunakan algoritma **AES-256**. Data keluhan tidak dapat dibaca oleh Administrator maupun Psikolog; mereka hanya melihat metrik hasil.
+- **Dashboard Multi-Role:** Memiliki antarmuka khusus yang aman dan terpisah untuk `Mahasiswa`, `Admin`, dan `Psikolog`.
+- **Notifikasi Email Otomatis:** Sistem akan mengirimkan email (SMTP Gmail) otomatis kepada mahasiswa jika psikolog meninggalkan pesan peringatan atau mengatur jadwal konseling darurat.
+- **Sistem *Cooldown*:** Untuk menjaga integritas data dan mencegah manipulasi hasil kuesioner, pengisian HARS dikunci dengan *cooldown* selama 14 hari.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+---
 
-In addition, [Laracasts](https://laracasts.com) contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## 🚀 Teknologi yang Digunakan
 
-You can also watch bite-sized lessons with real-world projects on [Laravel Learn](https://laravel.com/learn), where you will be guided through building a Laravel application from scratch while learning PHP fundamentals.
+**Frontend:**
+- Blade Templates
+- Tailwind CSS v4 (menggunakan skrip *standalone* untuk stabilitas *runtime*)
+- Alpine.js (reaktivitas antarmuka interaktif tanpa *framework* berat)
 
-## Agentic Development
+**Backend:**
+- Laravel (PHP 8.3/8.4)
+- SQLite/MySQL Database
+- Integrasi API IndoBERT (Python/FastAPI Server)
 
-Laravel's predictable structure and conventions make it ideal for AI coding agents like Claude Code, Cursor, and GitHub Copilot. Install [Laravel Boost](https://laravel.com/docs/ai) to supercharge your AI workflow:
+**Infrastruktur & Cloud:**
+- Docker Containerization (Multi-stage build)
+- Azure Container Apps
+- GitHub Actions (CI/CD)
 
-```bash
-composer require laravel/boost --dev
+---
 
-php artisan boost:install
-```
+## 🛠️ Panduan Instalasi Lokal
 
-Boost provides your agent 15+ tools and skills that help agents build Laravel applications while following best practices.
+1. **Clone Repositori**
+   ```bash
+   git clone https://github.com/Ryonandha/skripsi-indobert-final.git
+   cd skripsi-indobert-final/web
+   ```
 
-## Contributing
+2. **Install Dependensi**
+   ```bash
+   composer install
+   ```
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+3. **Konfigurasi Lingkungan (.env)**
+   ```bash
+   cp .env.example .env
+   php artisan key:generate
+   ```
+   *Buka file `.env` dan lengkapi bagian berikut:*
+   - `DB_CONNECTION=sqlite` (Atau sesuaikan jika memakai MySQL)
+   - Konfigurasi **Google OAuth** (`GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`)
+   - Konfigurasi **IndoBERT API** (`INDOBERT_API_URL`, `INDOBERT_TOKEN`)
+   - Konfigurasi **SMTP Gmail** (`MAIL_USERNAME`, `MAIL_PASSWORD`)
 
-## Code of Conduct
+4. **Migrasi Database & Seeding (Akun Admin)**
+   ```bash
+   php artisan migrate --seed
+   ```
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+5. **Jalankan Server Lokal**
+   ```bash
+   php artisan serve
+   ```
+   Aplikasi dapat diakses di: `http://localhost:8000`
 
-## Security Vulnerabilities
+---
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+## ☁️ Panduan Deploy (Production)
 
-## License
+Proyek ini telah dikonfigurasi untuk *deployment* otomatis menggunakan **Docker** dan **Azure Container Apps**.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Untuk panduan lengkap (dari membuat *resource* Azure, mengatur rahasia, hingga *pipeline* GitHub Actions), silakan baca:
+👉 [**Panduan Deploy Azure (CARA-DEPLOY-WEB-AZURE.md)**](./deploy/CARA-DEPLOY-WEB-AZURE.md)
+
+---
+
+## 🔐 Keamanan & Ketentuan
+
+Aplikasi ini ditujukan murni sebagai alat bantu **skrining dini**, BUKAN sebagai diagnosis medis definitif.
+Semua data terenkripsi. Email pada profil mahasiswa dikunci secara paksa (*hard-coded readonly* & validasi *backend*) sesuai kebijakan OAuth untuk mencegah penyamaran (*impersonation*) identitas akun.
+
+---
+
+*Dikembangkan untuk penelitian Skripsi — STIKOM Yos Sudarso Purwokerto (2026).*
