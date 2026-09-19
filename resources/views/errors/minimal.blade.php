@@ -4,69 +4,80 @@
     @php $code = $exception->getStatusCode(); @endphp
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{ $code }} — {{ $code === 403 ? 'Akses Ditolak' : 'Terjadi Kesalahan' }}</title>
-    <link rel="icon" type="image/png" href="{{ asset('images/logo_stikom.png') }}">
+    <title>{{ $code }} — {{ $code === 403 ? 'Akses Ditolak' : ($code === 404 ? 'Halaman Tidak Ditemukan' : 'Terjadi Kesalahan') }}</title>
+    <link rel="icon" type="image/png" href="{{ asset('images/logo_web.png') }}">
     <script src="/assets/tailwind.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
     <style>
-        .hero-gradient { background: linear-gradient(135deg, #0f766e 0%, #0d9488 45%, #14b8a6 100%); }
+        body { background: #f8fafc; font-family: 'Inter', system-ui, sans-serif; }
     </style>
 </head>
-<body class="font-sans bg-calm-50 text-slate-800 antialiased min-h-screen flex items-center justify-center p-4">
+<body class="min-h-screen flex items-center justify-center p-4">
     <div class="max-w-md w-full text-center">
-        <div class="w-20 h-20 rounded-2xl hero-gradient flex items-center justify-center mx-auto mb-6 shadow-lg shadow-teal-200">
-            @if($code === 403)
-                <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
-            @elseif($code === 404)
-                <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-            @else
-                <svg class="w-10 h-10 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/></svg>
-            @endif
+
+        <!-- Mascot image based on error type -->
+        @if($code >= 500)
+            <img src="{{ asset('images/errorr.png') }}" alt="Error" class="w-40 h-40 object-contain mx-auto mb-4" style="mix-blend-mode: multiply;">
+        @elseif($code === 503)
+            <img src="{{ asset('images/maintenance.png') }}" alt="Maintenance" class="w-40 h-40 object-contain mx-auto mb-4" style="mix-blend-mode: multiply;">
+        @else
+            <img src="{{ asset('images/errorr.png') }}" alt="Error" class="w-36 h-36 object-contain mx-auto mb-4" style="mix-blend-mode: multiply;">
+        @endif
+
+        <!-- Logo -->
+        <div class="flex items-center justify-center gap-2 mb-6">
+            <img src="{{ asset('images/logo_web.png') }}" alt="SiPeka" class="w-7 h-7 object-contain">
+            <span style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; color: #0f172a; font-size: 1rem;">SiPeka</span>
         </div>
 
-        <h1 class="font-display text-6xl font-extrabold text-calm-900 mb-2">{{ $code }}</h1>
-        <h2 class="font-display text-xl font-bold text-calm-700 mb-3">
-            @if($code === 403)
-                Akses Ditolak
-            @elseif($code === 404)
-                Halaman Tidak Ditemukan
-            @elseif($code === 419)
-                Sesi Berakhir
-            @elseif($code === 429)
-                Terlalu Banyak Permintaan
-            @elseif($code >= 500)
-                Kesalahan Server
-            @else
-                Terjadi Kesalahan
+        <!-- Error code -->
+        <div style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 4rem; color: #e2e8f0; line-height: 1; margin-bottom: 8px;">{{ $code }}</div>
+
+        <h1 style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 1.375rem; color: #0f172a; margin-bottom: 10px;">
+            @if($code === 403) Akses Ditolak
+            @elseif($code === 404) Halaman Tidak Ditemukan
+            @elseif($code === 419) Sesi Berakhir
+            @elseif($code === 429) Terlalu Banyak Permintaan
+            @elseif($code === 503) Sedang Dalam Pemeliharaan
+            @elseif($code >= 500) Kesalahan Server
+            @else Terjadi Kesalahan
             @endif
-        </h2>
-        <p class="text-calm-500 text-sm mb-8 leading-relaxed">
+        </h1>
+
+        <p style="font-size: 0.9rem; color: #64748b; line-height: 1.6; margin-bottom: 28px; max-width: 360px; margin-left: auto; margin-right: auto;">
             @if($code === 403)
-                Maaf, Anda tidak memiliki hak akses ke halaman ini. Halaman tersebut hanya dapat diakses oleh peran tertentu (mahasiswa / psikolog / admin).
+                Maaf, Anda tidak memiliki hak akses ke halaman ini. Pastikan Anda sudah masuk dengan akun yang tepat.
             @elseif($code === 404)
-                Halaman yang Anda cari tidak ada atau sudah dipindahkan.
+                Halaman yang Anda cari tidak ada atau sudah dipindahkan. Periksa kembali alamat URL-nya.
             @elseif($code === 419)
-                Sesi Anda telah berakhir karena terlalu lama tidak aktif. Silakan coba lagi.
+                Sesi Anda telah berakhir karena terlalu lama tidak aktif. Silakan coba lagi dari halaman sebelumnya.
             @elseif($code === 429)
-                Terlalu banyak percobaan. Tunggu sebentar lalu coba lagi.
+                Terlalu banyak percobaan dalam waktu singkat. Tunggu sebentar lalu coba kembali.
+            @elseif($code === 503)
+                Sistem sedang dalam pemeliharaan untuk peningkatan layanan. Silakan coba beberapa saat lagi.
             @elseif($code >= 500)
-                Terjadi kesalahan pada server. Tim teknis telah diberi tahu. Silakan coba beberapa saat lagi.
+                Terjadi kesalahan pada server kami. Tim teknis telah diberi tahu. Silakan coba beberapa saat lagi.
             @else
-                Terjadi kesalahan yang tidak terduga. Silakan coba lagi.
+                Terjadi kesalahan yang tidak terduga. Silakan coba kembali.
             @endif
         </p>
 
         <div class="flex items-center justify-center gap-3">
             <a href="javascript:history.back()"
-               class="px-5 py-2.5 bg-white border border-calm-200 text-calm-600 hover:bg-calm-100 rounded-xl font-medium text-sm transition-colors">
-                Kembali
+               style="padding: 10px 20px; background: #fff; border: 1px solid #e2e8f0; color: #475569; border-radius: 8px; font-weight: 600; font-size: 0.875rem; text-decoration: none; transition: all 0.15s;"
+               onmouseover="this.style.background='#f8fafc'" onmouseout="this.style.background='#fff'">
+                ← Kembali
             </a>
             <a href="/"
-               class="px-5 py-2.5 hero-gradient text-white rounded-xl font-medium text-sm transition-opacity hover:opacity-90">
+               style="padding: 10px 20px; background: #0284c7; color: #fff; border-radius: 8px; font-weight: 600; font-size: 0.875rem; text-decoration: none; transition: background 0.15s;"
+               onmouseover="this.style.background='#0369a1'" onmouseout="this.style.background='#0284c7'">
                 Ke Halaman Utama
             </a>
         </div>
 
-        <p class="mt-8 text-xs text-calm-400">SiPeka — Sistem Skrining Kecemasan Mahasiswa STIKOM Yos Sudarso</p>
+        <p style="margin-top: 32px; font-size: 0.75rem; color: #cbd5e1;">
+            SiPeka — Sistem Skrining Kecemasan Mahasiswa STIKOM Yos Sudarso
+        </p>
     </div>
 </body>
 </html>

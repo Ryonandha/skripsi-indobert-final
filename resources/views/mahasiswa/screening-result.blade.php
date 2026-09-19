@@ -41,15 +41,39 @@
     <!-- Tingkat Risiko -->
     <div class="rounded-xl border p-6 mb-5 {{ $r['bg'] }} {{ $r['border'] }}">
         <div class="flex flex-col sm:flex-row sm:items-center gap-5">
-            <div class="w-12 h-12 rounded-xl bg-white/70 border {{ $r['border'] }} flex items-center justify-center flex-shrink-0">
-                <span class="w-3 h-3 rounded-full {{ $r['dot'] }}"></span>
-            </div>
+            @php
+                // Map IndoBERT emotion label to mascot image
+                $emotionImages = [
+                    'fear'      => 'fear.png',
+                    'sadness'   => 'saddnes.png',
+                    'anger'     => 'anger.png',
+                    'happy'     => 'happy.png',
+                    'neutral'   => 'non_distres.png',
+                    'non_distress' => 'non_distres.png',
+                    'joy'       => 'happy.png',
+                    'surprise'  => 'awal_menyambut.png',
+                ];
+                $emotionKey = strtolower($screening->emotion_label ?? '');
+                $emotionImg = $emotionImages[$emotionKey] ?? 'awal_menyambut.png';
+            @endphp
+            <img src="{{ asset('images/' . $emotionImg) }}" alt="{{ $screening->emotion_label }}"
+                 class="w-20 h-20 object-contain flex-shrink-0 hidden sm:block"
+                 style="mix-blend-mode: multiply;">
             <div class="flex-1">
                 <p class="text-xs uppercase tracking-wide {{ $r['text'] }} opacity-70 font-semibold">Tingkat Risiko Kecemasan</p>
                 <p class="font-display text-3xl font-bold {{ $r['text'] }} capitalize mt-0.5">{{ $screening->risk_level }}</p>
+                @if($screening->emotion_label)
+                    <p class="text-sm {{ $r['text'] }} opacity-75 mt-1">
+                        Emosi terdeteksi: <b>{{ $screening->emotion_label }}</b>
+                        @if($screening->emotion_confidence)
+                            · {{ number_format($screening->emotion_confidence * 100, 1) }}% keyakinan
+                        @endif
+                    </p>
+                @endif
             </div>
         </div>
     </div>
+
 
     @if($screening->crisis_flag)
         {{-- Dukungan krisis: bahasa menenangkan + langkah nyata --}}

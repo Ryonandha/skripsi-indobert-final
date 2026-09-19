@@ -18,10 +18,17 @@
     <div class="w-full max-w-sm">
         <!-- Logo -->
         <div class="text-center mb-8">
+            @if($errors->any())
+                <img src="{{ asset('images/login_gagal.png') }}" alt="Login Gagal" style="width:120px; height:120px; object-fit:contain; margin: 0 auto 16px; mix-blend-mode: multiply;">
+            @elseif(session('info') || session('success'))
+                <img src="{{ asset('images/login_berhasil.png') }}" alt="Login Berhasil" style="width:120px; height:120px; object-fit:contain; margin: 0 auto 16px; mix-blend-mode: multiply;">
+            @else
+                <img src="{{ asset('images/awal_menyambut.png') }}" alt="Halo!" style="width:100px; height:100px; object-fit:contain; margin: 0 auto 16px; mix-blend-mode: multiply;">
+            @endif
             <div class="inline-flex items-center gap-2.5">
-                <img src="{{ asset('images/logo_web.png') }}" alt="SiPeka" class="w-12 h-12 object-contain">
+                <img src="{{ asset('images/logo_web.png') }}" alt="SiPeka" class="w-10 h-10 object-contain">
                 <div class="text-left">
-                    <p style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 1.25rem; color: #0f172a; line-height: 1.2;">SiPeka</p>
+                    <p style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 1.125rem; color: #0f172a; line-height: 1.2;">SiPeka</p>
                     <p style="font-size: 0.7rem; color: #94a3b8; line-height: 1;">STIKOM Yos Sudarso</p>
                 </div>
             </div>
