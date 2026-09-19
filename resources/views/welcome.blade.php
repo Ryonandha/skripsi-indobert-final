@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SiPeka — Skrining Risiko Kecemasan Mahasiswa STIKOM Yos Sudarso</title>
-    <link rel="icon" type="image/png" href="{{ asset('images/logo_stikom.png') }}">
+    <link rel="icon" type="image/png" href="{{ asset('images/icon_kecil.png') }}">
     <script src="/assets/tailwind.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
@@ -296,47 +296,73 @@
     <div class="section">
         <div style="margin-bottom: 48px; text-align: center;">
             <div class="section-label">Mengenal SiPeka</div>
-            <div class="section-title">Filosofi Maskot &amp; Logo</div>
-            <div class="section-desc">Identitas visual yang mewakili visi perlindungan dan dukungan emosional</div>
+            <div class="section-title">Maskot &amp; Identitas Visual</div>
+            <div class="section-desc">Simbol yang mewakili kepekaan, perlindungan, dan dukungan emosional</div>
         </div>
 
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 48px; align-items: center; margin-bottom: 72px;">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px; align-items: center; margin-bottom: 64px;">
             <div style="text-align: center; background: #f8fafc; padding: 24px; border-radius: 20px; border: 1px solid #e2e8f0;">
-                <img src="{{ asset('images/awal_menyambut.png') }}" alt="Maskot SiPeka" style="max-width: 100%; height: auto; max-height: 280px; mix-blend-mode: multiply; margin: 0 auto;">
+                <img src="{{ asset('images/awal_menyambut.png') }}" alt="Maskot SiPeka" style="max-width: 100%; height: auto; max-height: 240px; mix-blend-mode: multiply; margin: 0 auto;">
             </div>
             <div>
-                <h3 style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 1.25rem; color: #0f172a; margin-bottom: 16px;">Makna Burung Hantu sebagai Maskot</h3>
-                <p style="font-size: 0.9375rem; color: #475569; line-height: 1.75; margin-bottom: 16px;">
-                    Burung hantu dipilih sebagai maskot SiPeka karena secara simbolis merepresentasikan kepekaan dan perhatian. Karakteristik tersebut relevan dengan fungsi SiPeka yang melakukan skrining awal terhadap risiko kecemasan mahasiswa dengan memperhatikan dua sumber informasi, yaitu respons HARS dan narasi yang dianalisis menggunakan IndoBERT.
-                </p>
-                <p style="font-size: 0.9375rem; color: #475569; line-height: 1.75;">
-                    Desain burung hantu kemudian dibuat dengan ekspresi yang tenang dan bersahabat untuk merepresentasikan SiPeka sebagai pendamping dalam proses skrining, bukan sebagai pengganti tenaga profesional atau alat diagnosis.
+                <span style="font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #0284c7;">Maskot</span>
+                <h3 style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 1.125rem; color: #0f172a; margin: 8px 0 12px;">Burung Hantu — Simbol Kepekaan</h3>
+                <p style="font-size: 0.9rem; color: #475569; line-height: 1.75;">
+                    Burung hantu merepresentasikan kepekaan dan perhatian — dua nilai utama SiPeka. Ekspresi tenang dan bersahabat menggambarkan posisi SiPeka sebagai <em>pendamping</em>, bukan alat diagnosis. Ia memperhatikan dua sumber informasi sekaligus: skor HARS dan narasi emosional yang dianalisis IndoBERT.
                 </p>
             </div>
         </div>
 
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 48px; align-items: center;">
-            <div style="text-align: center; background: #f8fafc; padding: 24px; border-radius: 20px; border: 1px solid #e2e8f0;" class="md-order-2">
-                <img src="{{ asset('images/makna_logo.png') }}" alt="Logo SiPeka" style="max-width: 100%; height: auto; max-height: 320px; mix-blend-mode: multiply; margin: 0 auto;">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px; align-items: center;">
+            <div style="text-align: center; background: #f8fafc; padding: 24px; border-radius: 20px; border: 1px solid #e2e8f0; order: 2;">
+                <img src="{{ asset('images/makna_logo.png') }}" alt="Logo SiPeka" style="max-width: 100%; height: auto; max-height: 280px; mix-blend-mode: multiply; margin: 0 auto;">
             </div>
-            <div class="md-order-1">
-                <h3 style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 1.25rem; color: #0f172a; margin-bottom: 16px;">Filosofi Logo SiPeka</h3>
-                <p style="font-size: 0.9375rem; color: #475569; line-height: 1.75; margin-bottom: 16px;">
-                    Logo SiPeka merupakan perpaduan antara burung hantu, bentuk huruf "S", dan elemen visual yang menyerupai pelukan atau perisai. Burung hantu merepresentasikan kepekaan, pengamatan, dan kesadaran terhadap kondisi diri, sementara mata yang besar menggambarkan kemampuan untuk mengenali tanda-tanda kecemasan sejak dini.
-                </p>
-                <p style="font-size: 0.9375rem; color: #475569; line-height: 1.75;">
-                    Bentuk "S" yang mengelilingi burung hantu memberikan makna perlindungan, dukungan, dan ruang yang aman bagi mahasiswa. Dominasi warna biru merepresentasikan ketenangan, rasa aman, dan kepercayaan, sedangkan aksen kuning memberikan kesan kehangatan dan harapan. Keseluruhan identitas dirancang dengan pendekatan yang ramah dan modern agar SiPeka tidak terasa seperti sistem klinis yang kaku, tetapi sebagai teman digital yang membantu mahasiswa mengenali, memahami, dan merespons kondisi dirinya dengan lebih baik.
+            <div style="order: 1;">
+                <span style="font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: #0284c7;">Logo</span>
+                <h3 style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 1.125rem; color: #0f172a; margin: 8px 0 12px;">Perpaduan Burung Hantu, "S", &amp; Perisai</h3>
+                <p style="font-size: 0.9rem; color: #475569; line-height: 1.75;">
+                    Logo SiPeka memadukan burung hantu, huruf "S" berbentuk pelukan, dan perisai perlindungan. <b style="color: #0284c7;">Biru</b> mewakili ketenangan dan kepercayaan; <b style="color: #d97706;">kuning</b> memberi kesan kehangatan dan harapan. Keseluruhan desain menghadirkan SiPeka bukan sebagai sistem klinis yang kaku, melainkan sebagai teman digital yang hangat.
                 </p>
             </div>
         </div>
     </div>
 </div>
-<style>
-    @media(min-width: 768px) {
-        .md-order-1 { order: -1; }
-        .md-order-2 { order: 2; }
-    }
-</style>
+
+<!-- SIPEKA × STIKOM -->
+<div style="background: #f8fafc; border-bottom: 1px solid #e2e8f0;">
+    <div style="max-width: 900px; margin: 0 auto; padding: 64px 24px;">
+        <div style="text-align: center; margin-bottom: 40px;">
+            <div class="section-label">Tentang</div>
+            <div class="section-title" style="font-size: 1.5rem;">SiPeka &amp; STIKOM Yos Sudarso</div>
+        </div>
+        <div style="display: flex; align-items: center; justify-content: center; gap: 32px; flex-wrap: wrap; margin-bottom: 32px;">
+            <!-- SiPeka logo -->
+            <div style="text-align: center;">
+                <img src="{{ asset('images/logo_web.png') }}" alt="SiPeka" style="width: 80px; height: 80px; object-fit: contain; mix-blend-mode: multiply; margin: 0 auto 10px;">
+                <p style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 1rem; color: #0f172a;">SiPeka</p>
+                <p style="font-size: 0.75rem; color: #94a3b8;">Sistem Skrining Kecemasan</p>
+            </div>
+
+            <!-- Connector -->
+            <div style="display: flex; flex-direction: column; align-items: center; gap: 6px; color: #cbd5e1;">
+                <div style="width: 40px; height: 1px; background: #e2e8f0;"></div>
+                <span style="font-size: 0.75rem; font-weight: 600; color: #94a3b8; white-space: nowrap;">dikembangkan untuk</span>
+                <div style="width: 40px; height: 1px; background: #e2e8f0;"></div>
+            </div>
+
+            <!-- STIKOM logo -->
+            <div style="text-align: center;">
+                <img src="{{ asset('images/logo_stikom.png') }}" alt="STIKOM Yos Sudarso" style="width: 80px; height: 80px; object-fit: contain; mix-blend-mode: multiply; margin: 0 auto 10px;">
+                <p style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 800; font-size: 1rem; color: #0f172a;">STIKOM Yos Sudarso</p>
+                <p style="font-size: 0.75rem; color: #94a3b8;">Purwokerto</p>
+            </div>
+        </div>
+        <p style="text-align: center; font-size: 0.9rem; color: #64748b; line-height: 1.7; max-width: 600px; margin: 0 auto;">
+            SiPeka merupakan sistem skrining risiko kecemasan mahasiswa yang dikembangkan khusus untuk mendukung kesehatan mental civitas akademika STIKOM Yos Sudarso Purwokerto, mengintegrasikan teknologi AI berbahasa Indonesia dengan standar klinis HARS.
+        </p>
+    </div>
+</div>
+
 
 <!-- EDUKASI -->
 @php $educations = \App\Models\Education::where('is_published', true)->latest()->take(3)->get(); @endphp

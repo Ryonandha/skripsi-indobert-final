@@ -40,8 +40,12 @@
                     @if(auth()->user()->isMahasiswa())
                         <div>
                             <label class="block text-sm font-medium text-calm-700 mb-1">NIM <span class="text-danger-500">*</span></label>
-                            <input type="text" name="nim" value="{{ old('nim', auth()->user()->nim) }}" required maxlength="7"
-                                   class="w-full px-4 py-2.5 border border-calm-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none">
+                            <input type="text" name="nim" value="{{ old('nim', auth()->user()->nim) }}" required
+                                   inputmode="numeric" pattern="[0-9]{9}" maxlength="9"
+                                   placeholder="Contoh: 202201009"
+                                   oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0,9)"
+                                   class="w-full px-4 py-2.5 border border-calm-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none font-mono tracking-widest">
+                            <p class="text-xs text-calm-400 mt-1">9 digit angka tanpa huruf atau spasi</p>
                             @error('nim') <p class="text-danger-500 text-sm mt-1">{{ $message }}</p> @enderror
                         </div>
 

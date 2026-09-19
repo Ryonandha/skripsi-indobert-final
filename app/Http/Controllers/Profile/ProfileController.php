@@ -25,7 +25,7 @@ class ProfileController extends Controller
         ];
 
         if ($user->isMahasiswa()) {
-            $rules['nim'] = ['required', 'digits:7', 'unique:users,nim,' . $user->id];
+            $rules['nim'] = ['required', 'digits:9', 'numeric', 'unique:users,nim,' . $user->id];
             $rules['prodi'] = ['required', 'string', 'max:100'];
         }
 
