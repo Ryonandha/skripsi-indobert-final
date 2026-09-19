@@ -135,10 +135,11 @@
 <nav class="navbar">
     <div class="navbar-inner">
         <a href="#" class="logo">
-            <div class="logo-icon">
-                <svg width="18" height="18" fill="none" stroke="white" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+            <img src="{{ asset('images/logo_stikom.png') }}" alt="Logo STIKOM Yos Sudarso" style="width:36px; height:36px; object-fit:contain; flex-shrink:0;">
+            <div>
+                <div class="logo-text">SiPeka</div>
+                <div style="font-size: 0.65rem; color: #94a3b8; line-height: 1; margin-top: 1px;">STIKOM Yos Sudarso</div>
             </div>
-            <span class="logo-text">SiPeka</span>
         </a>
         <div class="nav-links">
             <a href="#cara-kerja">Cara Kerja</a>
@@ -341,8 +342,11 @@
 <!-- FOOTER -->
 <div class="footer">
     <div class="footer-inner">
-        <div class="footer-text">&copy; {{ date('Y') }} SiPeka · STIKOM Yos Sudarso Purwokerto · IndoBERT + HARS</div>
-        <a href="{{ route('admin.login') }}" class="footer-link">Login Staf →</a>
+        <div style="display: flex; align-items: center; gap: 10px;">
+            <img src="{{ asset('images/logo_stikom.png') }}" alt="Logo STIKOM" style="width:22px; height:22px; object-fit:contain; opacity:0.4;">
+            <span class="footer-text">&copy; {{ date('Y') }} SiPeka · STIKOM Yos Sudarso Purwokerto</span>
+        </div>
+        <div class="footer-text">Dikembangkan dengan IndoBERT + HARS</div>
     </div>
 </div>
 
