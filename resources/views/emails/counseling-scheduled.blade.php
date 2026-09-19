@@ -12,9 +12,10 @@
 
                     {{-- Header --}}
                     <tr>
-                        <td style="background-color: #ffffff; border-top: 4px solid #0d9488; border-bottom: 1px solid #e2e8f0; padding:28px 32px; text-align:center;">
+                        <td style="background-color: #ffffff; border-top: 4px solid #0284c7; border-bottom: 1px solid #e2e8f0; padding:28px 32px; text-align:center;">
+                            <img src="{{ asset('images/logo_web.png') }}" alt="SiPeka" style="width: 56px; height: 56px; object-fit: contain; margin-bottom: 12px; display: inline-block;">
                             <h1 style="margin:0; color:#0f172a; font-size:20px; font-weight:700;">
-                                📅 Jadwal Konseling Baru
+                                Jadwal Konseling Baru
                             </h1>
                         </td>
                     </tr>
