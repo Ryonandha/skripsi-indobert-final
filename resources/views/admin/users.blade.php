@@ -108,7 +108,10 @@
                             </td>
                         </tr>
                     @empty
-                        <tr><td colspan="6" class="px-4 py-12 text-center text-calm-400">Tidak ada data{{ request('q') ? ' untuk pencarian "' . request('q') . '"' : '' }}.</td></tr>
+                        <tr><td colspan="6" class="px-4 py-12 text-center">
+                            <img src="{{ asset('images/data_tidak_ada.png') }}" alt="Data tidak ada" class="w-32 h-32 object-contain mx-auto mb-3" style="mix-blend-mode:multiply;">
+                            <div class="text-calm-400 text-sm">Tidak ada data{{ request('q') ? ' untuk pencarian "' . request('q') . '"' : '' }}.</div>
+                        </td></tr>
                     @endforelse
                 </tbody>
             </table>

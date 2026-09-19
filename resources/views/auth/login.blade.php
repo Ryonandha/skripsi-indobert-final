@@ -74,5 +74,31 @@
 
         <p style="text-align: center; font-size: 11px; color: #cbd5e1; margin-top: 20px;">&copy; {{ date('Y') }} STIKOM Yos Sudarso Purwokerto</p>
     </div>
+
+    @if(session('logout_success'))
+    <div id="logoutSplash" style="position:fixed;inset:0;z-index:9999;background:rgba(255,255,255,0.95);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;transition:opacity 0.5s ease;backdrop-filter:blur(4px);">
+        <img src="{{ asset('images/logout_berhasil.png') }}" alt="Logout Berhasil"
+             style="width:200px;height:200px;object-fit:contain;mix-blend-mode:multiply;animation:bounceIn 0.6s ease;">
+        <div style="text-align:center;">
+            <p style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:1.5rem;color:#0f172a;margin-bottom:6px;">Berhasil Keluar</p>
+            <p style="font-size:0.95rem;color:#64748b;max-width:300px;line-height:1.5;">Kamu telah keluar dari sistem dengan aman.</p>
+        </div>
+        <div style="display:flex;gap:6px;margin-top:8px;">
+            <span style="width:8px;height:8px;border-radius:50%;background:#0284c7;animation:dot 1.2s 0s infinite;"></span>
+            <span style="width:8px;height:8px;border-radius:50%;background:#0284c7;animation:dot 1.2s 0.2s infinite;"></span>
+            <span style="width:8px;height:8px;border-radius:50%;background:#0284c7;animation:dot 1.2s 0.4s infinite;"></span>
+        </div>
+    </div>
+    <style>
+        @keyframes bounceIn { 0% { transform: scale(0.5); opacity: 0; } 70% { transform: scale(1.1); opacity: 1; } 100% { transform: scale(1); } }
+        @keyframes dot { 0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; } 40% { transform: scale(1); opacity: 1; } }
+    </style>
+    <script>
+        setTimeout(function() {
+            var splash = document.getElementById('logoutSplash');
+            if (splash) { splash.style.opacity = '0'; setTimeout(function(){ splash.remove(); }, 500); }
+        }, 2000);
+    </script>
+    @endif
 </body>
 </html>

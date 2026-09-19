@@ -56,6 +56,7 @@
                 @empty
                     <tr>
                         <td colspan="5" class="p-10 text-center">
+                            <img src="{{ asset('images/data_tidak_ada.png') }}" alt="Data tidak ada" class="w-32 h-32 object-contain mx-auto mb-3" style="mix-blend-mode:multiply;">
                             <div class="text-calm-400 text-sm">Belum ada riwayat skrining.</div>
                             <a href="{{ route('mahasiswa.screening.create') }}" class="mt-3 inline-block text-primary-700 text-sm font-medium hover:underline">Mulai skrining pertama →</a>
                         </td>

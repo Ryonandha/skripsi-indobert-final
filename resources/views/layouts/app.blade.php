@@ -205,7 +205,97 @@
          x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
          x-transition:leave="transition-opacity ease-linear duration-150"
          x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
-         class="fixed inset-0 bg-black/40 z-40 lg:hidden" @click="sidebarOpen = false"></div>
+         class="fixed inset-0 bg-slate-900/50 z-40 lg:hidden" @click="sidebarOpen = false"></div>
+
+    <!-- Custom Confirm Modal -->
+    <div id="customConfirmModal" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(15,23,42,0.6);align-items:center;justify-content:center;backdrop-filter:blur(4px);">
+        <div style="background:#fff;border-radius:24px;padding:32px 24px;max-width:380px;width:90%;text-align:center;box-shadow:0 20px 25px -5px rgba(0,0,0,0.1);animation: bounceIn 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);">
+            <img id="confirmImg" src="" alt="Alert" style="width:140px;height:140px;object-fit:contain;margin:0 auto 20px;mix-blend-mode:multiply;">
+            <h3 id="confirmTitle" style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:1.25rem;color:#0f172a;margin-bottom:8px;">Konfirmasi</h3>
+            <p id="confirmMessage" style="font-size:0.875rem;color:#64748b;margin-bottom:28px;line-height:1.6;"></p>
+            <div style="display:flex;gap:12px;justify-content:center;">
+                <button id="confirmCancelBtn" style="flex:1;padding:12px;border-radius:12px;background:#f8fafc;color:#64748b;font-weight:700;font-size:0.875rem;border:1px solid #e2e8f0;cursor:pointer;transition:all 0.2s;" onmouseover="this.style.background='#f1f5f9'" onmouseout="this.style.background='#f8fafc'">Tidak</button>
+                <button id="confirmOkBtn" style="flex:1;padding:12px;border-radius:12px;color:#fff;font-weight:700;font-size:0.875rem;border:none;cursor:pointer;transition:all 0.2s;">Iya</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Success Splash Overlay (Hapus & Update) -->
+    @if(session('success'))
+        @php
+            $msg = strtolower(session('success'));
+            $isHapus = str_contains($msg, 'hapus');
+            $splashImg = $isHapus ? 'hapus_berhasil.png' : 'update_berhasil.png';
+            $splashTitle = $isHapus ? 'Berhasil Dihapus!' : 'Berhasil Disimpan!';
+        @endphp
+        <div id="successSplash" style="position:fixed;inset:0;z-index:9998;background:rgba(255,255,255,0.95);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;transition:opacity 0.5s ease;backdrop-filter:blur(4px);">
+            <img src="{{ asset('images/' . $splashImg) }}" alt="Success"
+                 style="width:200px;height:200px;object-fit:contain;mix-blend-mode:multiply;animation:bounceIn 0.6s ease;">
+            <div style="text-align:center;">
+                <p style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:1.5rem;color:#0f172a;margin-bottom:6px;">{{ $splashTitle }}</p>
+                <p style="font-size:0.95rem;color:#64748b;max-width:300px;line-height:1.5;">{{ session('success') }}</p>
+            </div>
+            <div style="display:flex;gap:6px;margin-top:8px;">
+                <span style="width:8px;height:8px;border-radius:50%;background:#0284c7;animation:dot 1.2s 0s infinite;"></span>
+                <span style="width:8px;height:8px;border-radius:50%;background:#0284c7;animation:dot 1.2s 0.2s infinite;"></span>
+                <span style="width:8px;height:8px;border-radius:50%;background:#0284c7;animation:dot 1.2s 0.4s infinite;"></span>
+            </div>
+        </div>
+        <script>
+            setTimeout(function() {
+                var splash = document.getElementById('successSplash');
+                if (splash) { splash.style.opacity = '0'; setTimeout(function(){ splash.remove(); }, 500); }
+            }, 2500);
+        </script>
+    @endif
+
+    <script>
+    window.customConfirm = function(message, type, formElement) {
+        var modal = document.getElementById('customConfirmModal');
+        var img = document.getElementById('confirmImg');
+        var okBtn = document.getElementById('confirmOkBtn');
+        
+        document.getElementById('confirmMessage').innerText = message;
+        
+        if (type === 'delete') {
+            img.src = "{{ asset('images/alert_hapus_data.png') }}";
+            okBtn.style.background = '#ef4444';
+            okBtn.innerText = 'Iya, Hapus';
+        } else {
+            img.src = "{{ asset('images/alert_yes_no.png') }}";
+            okBtn.style.background = '#0284c7';
+            okBtn.innerText = 'Iya';
+        }
+        
+        modal.style.display = 'flex';
+        
+        document.getElementById('confirmCancelBtn').onclick = function() {
+            modal.style.display = 'none';
+        };
+        
+        okBtn.onclick = function() {
+            modal.style.display = 'none';
+            if (formElement) formElement.submit();
+        };
+    };
+
+    document.addEventListener('DOMContentLoaded', function() {
+        var forms = document.querySelectorAll('form[onsubmit*="confirm("]');
+        forms.forEach(function(form) {
+            var match = form.getAttribute('onsubmit').match(/confirm\(['"](.*?)['"]\)/);
+            if (match) {
+                var msg = match[1];
+                var isDelete = form.innerHTML.includes('value="DELETE"') || msg.toLowerCase().includes('hapus');
+                
+                form.removeAttribute('onsubmit');
+                form.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    window.customConfirm(msg, isDelete ? 'delete' : 'question', form);
+                });
+            }
+        });
+    });
+    </script>
 
     <!-- Sidebar -->
     @auth

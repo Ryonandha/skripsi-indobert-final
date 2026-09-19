@@ -57,6 +57,7 @@ class AuthenticatedSessionController extends Controller
         auth()->logout();
         $request->session()->invalidate();
         $request->session()->regenerateToken();
+        $request->session()->flash('logout_success', true);
 
         return redirect()->route('login');
     }

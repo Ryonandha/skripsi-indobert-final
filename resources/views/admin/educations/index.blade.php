@@ -50,7 +50,10 @@
                 </tr>
             @empty
                 <tr>
-                    <td colspan="4" class="p-10 text-center text-calm-400 text-sm">Belum ada artikel edukasi.</td>
+                    <td colspan="4" class="p-10 text-center">
+                        <img src="{{ asset('images/data_tidak_ada.png') }}" alt="Data tidak ada" class="w-32 h-32 object-contain mx-auto mb-3" style="mix-blend-mode:multiply;">
+                        <div class="text-calm-400 text-sm">Belum ada artikel edukasi.</div>
+                    </td>
                 </tr>
             @endforelse
         </tbody>

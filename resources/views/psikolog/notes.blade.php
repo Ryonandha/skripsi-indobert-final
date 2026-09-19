@@ -74,9 +74,7 @@
                     @empty
                         <tr>
                             <td colspan="6" class="py-12 text-center">
-                                <div class="w-16 h-16 rounded-full bg-calm-100 flex items-center justify-center mx-auto mb-3">
-                                    <svg class="w-8 h-8 text-calm-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
-                                </div>
+                                <img src="{{ asset('images/data_tidak_ada.png') }}" alt="Data tidak ada" class="w-32 h-32 object-contain mx-auto mb-3" style="mix-blend-mode:multiply;">
                                 <h3 class="font-display text-lg font-semibold text-calm-900 mb-1">Belum ada catatan progres</h3>
                                 <p class="text-calm-500 text-sm">Catatan akan muncul setelah konselor mengupdate penanganan</p>
                             </td>
