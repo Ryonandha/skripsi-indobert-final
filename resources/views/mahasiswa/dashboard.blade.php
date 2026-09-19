@@ -12,7 +12,11 @@
 <div class="flex items-center justify-between mb-6">
     <div>
         <h1 class="font-display text-xl font-bold text-slate-900">
-            Selamat {{ now()->hour < 12 ? 'pagi' : (now()->hour < 15 ? 'siang' : 'sore') }}, {{ auth()->user()->name }}
+            @php
+                $hour = now()->timezone('Asia/Jakarta')->hour;
+                $greeting = $hour < 11 ? 'pagi' : ($hour < 15 ? 'siang' : ($hour < 18 ? 'sore' : 'malam'));
+            @endphp
+            Selamat {{ $greeting }}, {{ explode(' ', auth()->user()->name)[0] }}
         </h1>
         <p class="text-sm text-slate-500 mt-0.5">Pantau kondisi kesehatanmu dari sini.</p>
     </div>

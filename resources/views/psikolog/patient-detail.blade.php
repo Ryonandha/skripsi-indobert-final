@@ -31,25 +31,26 @@
     </div>
 
     <!-- Contact Section (Proactive) -->
-    <div id="contact" class="mb-6 bg-warm-50 border border-warm-200 rounded-2xl p-6">
+    @if($latestScreening)
+    <div id="contact" class="mb-6 bg-warm-50 rounded-2xl shadow-card border border-warm-200 p-6">
         <h2 class="font-display text-xl font-semibold text-warm-800 flex items-center gap-2 mb-4">
             <svg class="w-5 h-5 text-warm-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
             Hubungi Mahasiswa (Proaktif)
         </h2>
         <p class="text-warm-700 text-sm mb-4">Kirim undangan konseling ke mahasiswa ini. Cocok untuk kasus risiko tinggi yang belum consent atau follow-up rutin.</p>
-        <form method="POST" action="{{ route('psikolog.contact', $latestScreening ?? $student->screenings->where('risk_level', '!=', 'rendah')->first()) }}" class="space-y-4">
+        <form method="POST" action="{{ route('psikolog.contact', $latestScreening) }}" class="space-y-4">
             @csrf
-            <input type="hidden" name="screening_id" value="{{ $latestScreening->id ?? '' }}">
+            <input type="hidden" name="screening_id" value="{{ $latestScreening->id }}">
             <textarea name="message" rows="4" required
                       placeholder="Tulis pesan undangan konseling (contoh: Halo [Nama], aku konselor kampus. Ingin mengajakmu sesi konseling singkat minggu ini. Kapan waktu yang cocok untukmu?)"
                       class="w-full px-4 py-3 border border-warm-300 rounded-xl focus:ring-2 focus:ring-warm-500 focus:border-warm-500 outline-none text-sm resize-none"></textarea>
-            <button type="submit"
-                    class="px-5 py-2.5 bg-warm-600 hover:bg-warm-700 text-white rounded-xl font-medium transition-colors flex items-center gap-2">
-                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
-                Kirim Undangan Konseling
+            <button type="submit" class="inline-flex justify-center items-center gap-2 px-5 py-2.5 bg-warm-600 hover:bg-warm-700 text-white rounded-xl font-medium transition-colors w-full sm:w-auto">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"/></svg>
+                Kirim Email Undangan
             </button>
         </form>
     </div>
+    @endif
 
     <!-- Screening History Timeline -->
     <div class="bg-white rounded-2xl shadow-card border border-calm-100 overflow-hidden">

@@ -69,8 +69,8 @@
                 @if($isMahasiswa)
                     <!-- NIM -->
                     <div>
-                        <label class="block text-sm font-medium text-calm-700 mb-1.5">NIM <span class="text-calm-400 font-normal">(7 digit)</span></label>
-                        <input type="text" name="nim" value="{{ old('nim', $user->nim ?? '') }}" maxlength="7"
+                        <label class="block text-sm font-medium text-calm-700 mb-1.5">NIM <span class="text-calm-400 font-normal">(9 digit angka)</span></label>
+                        <input type="text" name="nim" value="{{ old('nim', $user->nim ?? '') }}" maxlength="9" inputmode="numeric" oninput="this.value = this.value.replace(/[^0-9]/g, '')"
                                class="w-full border border-calm-200 rounded-xl px-4 py-2.5 focus:ring-2 focus:ring-primary-500 outline-none">
                         @error('nim') <p class="text-danger-600 text-sm mt-1">{{ $message }}</p> @enderror
                     </div>

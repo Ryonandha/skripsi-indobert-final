@@ -104,6 +104,7 @@
 
                 <form method="POST" action="{{ route('profile.password') }}" class="space-y-5 max-w-md">
                     @csrf
+                    @method('PUT')
 
                     <div>
                         <label class="block text-sm font-medium text-calm-700 mb-1">Password Saat Ini <span class="text-danger-500">*</span></label>

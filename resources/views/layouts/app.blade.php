@@ -244,8 +244,8 @@
         <script>
             setTimeout(function() {
                 var splash = document.getElementById('successSplash');
-                if (splash) { splash.style.opacity = '0'; setTimeout(function(){ splash.remove(); }, 500); }
-            }, 2500);
+                if (splash) { splash.style.opacity = '0'; setTimeout(function(){ splash.remove(); }, 300); }
+            }, 1200);
         </script>
     @endif
 

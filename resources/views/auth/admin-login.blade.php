@@ -68,8 +68,8 @@
     <script>
         setTimeout(function() {
             var splash = document.getElementById('logoutSplash');
-            if (splash) { splash.style.opacity = '0'; setTimeout(function(){ splash.remove(); }, 500); }
-        }, 2000);
+            if (splash) { splash.style.opacity = '0'; setTimeout(function(){ splash.remove(); }, 300); }
+        }, 1200);
     </script>
     @endif
 </div>

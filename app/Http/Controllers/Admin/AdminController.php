@@ -172,7 +172,7 @@ class AdminController extends Controller
             // Mahasiswa hanya bisa diedit (bukan dibuat di sini) dan login
             // lewat Google, sehingga tidak ada field password untuk role ini.
             $rules['prodi'] = ['nullable', 'string', 'max:100'];
-            $rules['nim'] = ['nullable', 'string', 'digits:7', Rule::unique('users')->ignore($ignoreId)];
+            $rules['nim'] = ['nullable', 'string', 'digits:9', Rule::unique('users')->ignore($ignoreId)];
 
             return $request->validate($rules);
         }
