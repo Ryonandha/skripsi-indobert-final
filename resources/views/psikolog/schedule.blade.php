@@ -74,7 +74,7 @@
             @php $upcoming = $schedules->get('upcoming', collect()); $past = $schedules->get('past', collect()); @endphp
 
             {{-- Sesi Mendatang --}}
-            <div class="bg-white rounded-2xl shadow-card border border-calm-100 overflow-hidden">
+            <div class="bg-white rounded-2xl shadow-card border border-calm-100 overflow-hidden overflow-x-auto">
                 <div class="p-5 border-b border-calm-100 flex items-center gap-2">
                     <h2 class="font-display text-lg font-semibold text-calm-900">Sesi Mendatang</h2>
                     <span class="px-2.5 py-0.5 rounded-full bg-primary-100 text-primary-700 text-xs font-semibold">{{ $upcoming->count() }}</span>
@@ -136,7 +136,7 @@
 
             {{-- Riwayat --}}
             @if($past->count())
-                <div class="bg-white rounded-2xl shadow-card border border-calm-100 overflow-hidden">
+                <div class="bg-white rounded-2xl shadow-card border border-calm-100 overflow-hidden overflow-x-auto">
                     <div class="p-5 border-b border-calm-100">
                         <h2 class="font-display text-lg font-semibold text-calm-900">Riwayat Sesi</h2>
                     </div>

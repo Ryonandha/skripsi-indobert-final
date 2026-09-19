@@ -94,6 +94,7 @@ class AdminController extends Controller
                 ->where('name', 'like', "%{$s}%")
                 ->orWhere('nim', 'like', "%{$s}%")
                 ->orWhere('email', 'like', "%{$s}%")))
+            ->when($request->prodi, fn ($q, $prodi) => $q->where('prodi', $prodi))
             ->withCount('screenings')
             ->latest()->paginate(15)->withQueryString();
 

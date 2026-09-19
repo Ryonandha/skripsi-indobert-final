@@ -55,11 +55,10 @@
                             <select name="prodi" required
                                     class="w-full px-4 py-2.5 border border-calm-200 rounded-xl focus:ring-2 focus:ring-primary-500 focus:border-primary-500 outline-none">
                                 <option value="">Pilih Program Studi</option>
-                                <option value="Informatika" {{ old('prodi', auth()->user()->prodi) === 'Informatika' ? 'selected' : '' }}>Informatika</option>
-                                <option value="Sistem Informasi" {{ old('prodi', auth()->user()->prodi) === 'Sistem Informasi' ? 'selected' : '' }}>Sistem Informasi</option>
-                                <option value="Teknik Informatika" {{ old('prodi', auth()->user()->prodi) === 'Teknik Informatika' ? 'selected' : '' }}>Teknik Informatika</option>
-                                <option value="Manajemen Informatika" {{ old('prodi', auth()->user()->prodi) === 'Manajemen Informatika' ? 'selected' : '' }}>Manajemen Informatika</option>
-                                <option value="Lainnya" {{ old('prodi', auth()->user()->prodi) === 'Lainnya' ? 'selected' : '' }}>Lainnya</option>
+                                <option value="S1 Sistem Informasi" {{ old('prodi', auth()->user()->prodi) === 'S1 Sistem Informasi' ? 'selected' : '' }}>S1 Sistem Informasi</option>
+                                <option value="S1 Teknik Informatika" {{ old('prodi', auth()->user()->prodi) === 'S1 Teknik Informatika' ? 'selected' : '' }}>S1 Teknik Informatika</option>
+                                <option value="S1 Desain Komunikasi Visual" {{ old('prodi', auth()->user()->prodi) === 'S1 Desain Komunikasi Visual' ? 'selected' : '' }}>S1 Desain Komunikasi Visual</option>
+                                <option value="D3 Komputer Akuntansi" {{ old('prodi', auth()->user()->prodi) === 'D3 Komputer Akuntansi' ? 'selected' : '' }}>D3 Komputer Akuntansi</option>
                             </select>
                             @error('prodi') <p class="text-danger-500 text-sm mt-1">{{ $message }}</p> @enderror
                         </div>

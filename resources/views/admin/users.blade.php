@@ -48,16 +48,34 @@
         </div>
     @endif
 
-    <!-- Search -->
-    <form class="flex gap-2 mb-6">
+    <!-- Search & Filter -->
+    <form class="flex flex-wrap gap-2 mb-6">
         <input type="hidden" name="role" value="{{ $role }}">
-        <input type="text" name="q" value="{{ request('q') }}" placeholder="Cari nama, NIM, atau email..."
-               class="border border-calm-200 rounded-xl px-4 py-2.5 w-full max-w-sm focus:ring-2 focus:ring-primary-500 outline-none bg-white text-sm">
-        <button class="bg-calm-800 hover:bg-calm-900 text-white rounded-xl px-5 py-2.5 text-sm font-medium transition-colors">Cari</button>
+        <div class="flex-1 min-w-[200px] max-w-sm">
+            <input type="text" name="q" value="{{ request('q') }}" placeholder="Cari nama, NIM, atau email..."
+                   class="w-full border border-calm-200 rounded-xl px-4 py-2.5 focus:ring-2 focus:ring-primary-500 outline-none bg-white text-sm">
+        </div>
+        
+        @if($role === 'mahasiswa')
+            <div class="w-full sm:w-auto">
+                <select name="prodi" class="w-full border border-calm-200 rounded-xl px-4 py-2.5 focus:ring-2 focus:ring-primary-500 outline-none bg-white text-sm">
+                    <option value="">Semua Prodi</option>
+                    @foreach(['S1 Sistem Informasi', 'S1 Teknik Informatika', 'S1 Desain Komunikasi Visual', 'D3 Komputer Akuntansi'] as $p)
+                        <option value="{{ $p }}" {{ request('prodi') === $p ? 'selected' : '' }}>{{ $p }}</option>
+                    @endforeach
+                </select>
+            </div>
+        @endif
+        
+        <button type="submit" class="bg-calm-800 hover:bg-calm-900 text-white rounded-xl px-5 py-2.5 text-sm font-medium transition-colors">Cari & Filter</button>
+        
+        @if(request('q') || request('prodi'))
+            <a href="{{ route('admin.users', ['role' => $role]) }}" class="bg-white border border-calm-200 hover:bg-calm-50 text-calm-600 rounded-xl px-4 py-2.5 text-sm font-medium transition-colors flex items-center">Reset</a>
+        @endif
     </form>
 
     <!-- Table -->
-    <div class="bg-white rounded-2xl shadow-card border border-calm-100 overflow-hidden">
+    <div class="bg-white rounded-2xl shadow-card border border-calm-100 overflow-hidden overflow-x-auto">
         <div class="overflow-x-auto">
             <table class="w-full text-sm">
                 <thead class="bg-calm-50 text-left border-b border-calm-100">

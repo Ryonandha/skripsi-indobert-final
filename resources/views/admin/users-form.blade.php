@@ -81,7 +81,7 @@
                         <select name="prodi"
                                 class="w-full border border-calm-200 rounded-xl px-4 py-2.5 focus:ring-2 focus:ring-primary-500 outline-none bg-white">
                             <option value="" disabled {{ old('prodi', $user->prodi ?? '') ? '' : 'selected' }}>— Pilih Prodi —</option>
-                            @foreach(['Informatika', 'Sistem Informasi', 'Teknik Informatika', 'Manajemen Informatika', 'Lainnya'] as $p)
+                            @foreach(['S1 Sistem Informasi', 'S1 Teknik Informatika', 'S1 Desain Komunikasi Visual', 'D3 Komputer Akuntansi'] as $p)
                                 <option value="{{ $p }}" {{ old('prodi', $user->prodi ?? '') === $p ? 'selected' : '' }}>{{ $p }}</option>
                             @endforeach
                         </select>

@@ -9,7 +9,7 @@
 @endphp
 
 <!-- Page Header -->
-<div class="flex items-center justify-between mb-6">
+<div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
     <div>
         <h1 class="font-display text-xl font-bold text-slate-900">
             @php
@@ -113,7 +113,7 @@
         </div>
 
         <!-- Quick Nav -->
-        <div class="grid grid-cols-2 gap-3">
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
             <a href="{{ route('mahasiswa.screening.create') }}" class="card p-4 flex items-center gap-3 hover:border-primary-300 hover:shadow-md transition-all group">
                 <div class="w-10 h-10 rounded-lg bg-primary-50 border border-primary-100 flex items-center justify-center flex-shrink-0 group-hover:bg-primary-100 transition-colors">
                     <svg class="w-5 h-5 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/></svg>

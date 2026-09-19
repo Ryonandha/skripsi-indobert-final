@@ -53,7 +53,7 @@
     @endif
 
     <!-- Screening History Timeline -->
-    <div class="bg-white rounded-2xl shadow-card border border-calm-100 overflow-hidden">
+    <div class="bg-white rounded-2xl shadow-card border border-calm-100 overflow-hidden overflow-x-auto">
         <div class="p-5 border-b border-calm-100">
             <h2 class="font-display text-xl font-semibold text-calm-900 flex items-center gap-2">
                 <svg class="w-5 h-5 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0l1-1m-1 1l-1-1"/></svg>

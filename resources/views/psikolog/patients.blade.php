@@ -62,7 +62,7 @@
                 $hasHighRisk = $student->screenings->contains('risk_level', 'tinggi');
                 $hasConsent = $student->screenings->contains('consent_followup', true);
             @endphp
-            <div class="bg-white rounded-2xl shadow-card border border-calm-100 overflow-hidden hover:shadow-card-hover transition-shadow duration-300">
+            <div class="bg-white rounded-2xl shadow-card border border-calm-100 overflow-hidden overflow-x-auto hover:shadow-card-hover transition-shadow duration-300">
                 <div class="p-5">
                     <div class="flex flex-col sm:flex-row sm:items-center gap-4">
                         <!-- Avatar & Info -->

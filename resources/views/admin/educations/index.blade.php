@@ -13,7 +13,7 @@
     </a>
 </div>
 
-<div class="bg-white rounded-xl border border-calm-200 overflow-hidden">
+<div class="bg-white rounded-xl border border-calm-200 overflow-hidden overflow-x-auto">
     <table class="w-full text-sm">
         <thead style="background:#f8fafc; border-bottom:1px solid #e2e8f0;">
             <tr>

@@ -8,7 +8,7 @@
         <p class="text-calm-500 mt-1">Riwayat catatan dari semua sesi konseling yang telah ditangani</p>
     </div>
 
-    <div class="bg-white rounded-2xl shadow-card border border-calm-100 overflow-hidden">
+    <div class="bg-white rounded-2xl shadow-card border border-calm-100 overflow-hidden overflow-x-auto">
         <div class="overflow-x-auto">
             <table class="w-full">
                 <thead class="bg-calm-50">
