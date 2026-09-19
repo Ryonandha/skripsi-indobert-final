@@ -166,6 +166,40 @@
 <?php header('Cache-Control: no-cache, no-store, must-revalidate; max-age=0'); header('Pragma: no-cache'); header('Expires: 0'); ?>
 <body class="font-sans antialiased" x-data="{ sidebarOpen: false }">
 
+    <!-- Login Success Splash -->
+    @if(session('login_success'))
+    <div id="loginSplash" style="position:fixed;inset:0;z-index:9999;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;transition:opacity 0.5s ease;">
+        <img src="{{ asset('images/login_berhasil.png') }}" alt="Login Berhasil"
+             style="width:180px;height:180px;object-fit:contain;mix-blend-mode:multiply;animation:bounceIn 0.6s ease;">
+        <div style="text-align:center;">
+            <p style="font-family:'Plus Jakarta Sans',sans-serif;font-weight:800;font-size:1.25rem;color:#0f172a;margin-bottom:4px;">Selamat Datang!</p>
+            <p style="font-size:0.875rem;color:#64748b;">{{ auth()->user()->name }}</p>
+        </div>
+        <div style="display:flex;gap:6px;margin-top:4px;">
+            <span style="width:8px;height:8px;border-radius:50%;background:#0284c7;animation:dot 1.2s 0s infinite;"></span>
+            <span style="width:8px;height:8px;border-radius:50%;background:#0284c7;animation:dot 1.2s 0.2s infinite;"></span>
+            <span style="width:8px;height:8px;border-radius:50%;background:#0284c7;animation:dot 1.2s 0.4s infinite;"></span>
+        </div>
+    </div>
+    <style>
+        @keyframes bounceIn {
+            0% { transform: scale(0.5); opacity: 0; }
+            70% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(1); }
+        }
+        @keyframes dot {
+            0%, 80%, 100% { transform: scale(0.6); opacity: 0.4; }
+            40% { transform: scale(1); opacity: 1; }
+        }
+    </style>
+    <script>
+        setTimeout(function() {
+            var splash = document.getElementById('loginSplash');
+            if (splash) { splash.style.opacity = '0'; setTimeout(function(){ splash.remove(); }, 500); }
+        }, 1800);
+    </script>
+    @endif
+
     <!-- Mobile overlay -->
     <div x-show="sidebarOpen" x-transition:enter="transition-opacity ease-linear duration-150"
          x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"

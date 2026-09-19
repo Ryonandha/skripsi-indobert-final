@@ -36,6 +36,7 @@
 
                 <form method="POST" action="{{ route('profile.update') }}" class="space-y-5" enctype="multipart/form-data">
                     @csrf
+                    @method('PUT')
 
                     @if(auth()->user()->isMahasiswa())
                         <div>

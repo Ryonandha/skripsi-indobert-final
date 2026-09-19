@@ -135,7 +135,7 @@
 <nav class="navbar">
     <div class="navbar-inner">
         <a href="#" class="logo">
-            <img src="{{ asset('images/logo_stikom.png') }}" alt="Logo STIKOM Yos Sudarso" style="width:36px; height:36px; object-fit:contain; flex-shrink:0;">
+            <img src="{{ asset('images/logo_web.png') }}" alt="SiPeka" style="width:36px; height:36px; object-fit:contain; flex-shrink:0; mix-blend-mode:multiply;">
             <div>
                 <div class="logo-text">SiPeka</div>
                 <div style="font-size: 0.65rem; color: #94a3b8; line-height: 1; margin-top: 1px;">STIKOM Yos Sudarso</div>
