@@ -8,7 +8,7 @@
     <script src="/assets/tailwind.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
             theme: {
@@ -19,343 +19,279 @@
                     },
                     colors: {
                         primary: {
-                            50: '#fffbeb', 100: '#fef3c7', 200: '#fde68a', 300: '#fcd34d', 400: '#fbbf24',
-                            500: '#f59e0b', 600: '#d97706', 700: '#b45309', 800: '#92400e', 900: '#78350f',
-                        },
-                        slate: {
-                            50: '#f8fafc', 100: '#f1f5f9', 200: '#e2e8f0', 300: '#cbd5e1', 400: '#94a3b8',
-                            500: '#64748b', 600: '#475569', 700: '#334155', 800: '#1e293b', 900: '#0f172a', 950: '#020617',
+                            50: '#f0f9ff', 100: '#e0f2fe', 200: '#bae6fd', 300: '#7dd3fc',
+                            400: '#38bdf8', 500: '#0ea5e9', 600: '#0284c7', 700: '#0369a1',
+                            800: '#075985', 900: '#0c4a6e',
                         },
                         calm: {
-                            50: '#f8fafc', 100: '#f1f5f9', 200: '#e2e8f0', 300: '#cbd5e1', 400: '#94a3b8',
-                            500: '#64748b', 600: '#475569', 700: '#334155', 800: '#1e293b', 900: '#0f172a',
+                            50: '#f8fafc', 100: '#f1f5f9', 200: '#e2e8f0', 300: '#cbd5e1',
+                            400: '#94a3b8', 500: '#64748b', 600: '#475569', 700: '#334155',
+                            800: '#1e293b', 900: '#0f172a',
                         },
                         danger: {
-                            50: '#fef2f2', 100: '#fee2e2', 200: '#fecaca', 300: '#fca5a5', 400: '#f87171',
-                            500: '#ef4444', 600: '#dc2626', 700: '#b91c1c', 800: '#991b1b', 900: '#7f1d1d',
+                            50: '#fff1f2', 100: '#ffe4e6', 400: '#fb7185',
+                            500: '#ef4444', 600: '#dc2626', 700: '#b91c1c',
                         },
-                        glass: {
-                            DEFAULT: 'rgba(255,255,255,0.08)',
-                            border: 'rgba(255,255,255,0.15)',
-                            hover: 'rgba(255,255,255,0.12)',
-                            card: 'rgba(255,255,255,0.06)',
+                        warn: {
+                            50: '#fffbeb', 100: '#fef3c7', 400: '#fbbf24',
+                            500: '#f59e0b', 600: '#d97706', 700: '#b45309',
+                        },
+                        success: {
+                            50: '#f0fdf4', 100: '#dcfce7', 400: '#4ade80',
+                            500: '#22c55e', 600: '#16a34a', 700: '#15803d',
                         }
                     },
-                    backdropBlur: {
-                        xs: '2px',
-                    },
-                    boxShadow: {
-                        'glass': '0 8px 32px 0 rgba(0, 0, 0, 0.3)',
-                        'glass-sm': '0 4px 16px 0 rgba(0, 0, 0, 0.2)',
-                        'amber': '0 4px 20px rgba(245, 158, 11, 0.3)',
-                    }
                 }
             }
         }
     </script>
     <style>
         [x-cloak] { display: none !important; }
-        @media (min-width: 1024px) {
-            aside[x-cloak] { display: block !important; }
-        }
+        @media (min-width: 1024px) { aside[x-cloak] { display: block !important; } }
 
-        /* ===== Global background ===== */
-        body {
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
-            min-height: 100vh;
-        }
-        body::before {
-            content: '';
-            position: fixed;
-            top: -20%;
-            right: -10%;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(245,158,11,0.08) 0%, transparent 70%);
-            pointer-events: none;
-            z-index: 0;
-        }
-        body::after {
-            content: '';
-            position: fixed;
-            bottom: -20%;
-            left: -10%;
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, rgba(59,130,246,0.07) 0%, transparent 70%);
-            pointer-events: none;
-            z-index: 0;
-        }
+        body { background-color: #f8fafc; }
 
-        /* ===== Glass components ===== */
-        .glass-sidebar {
-            background: rgba(15, 23, 42, 0.8);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-right: 1px solid rgba(255,255,255,0.08);
+        .sidebar {
+            background: #ffffff;
+            border-right: 1px solid #e2e8f0;
         }
-        .glass-topbar {
-            background: rgba(15, 23, 42, 0.75);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-            border-bottom: 1px solid rgba(255,255,255,0.08);
+        .topbar {
+            background: #ffffff;
+            border-bottom: 1px solid #e2e8f0;
         }
-        .glass-card {
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255,255,255,0.10);
-            box-shadow: 0 8px 32px rgba(0,0,0,0.25);
-        }
-        .glass-card-hover:hover {
-            background: rgba(255, 255, 255, 0.09);
-            border-color: rgba(255,255,255,0.18);
-            transform: translateY(-1px);
-            box-shadow: 0 12px 40px rgba(0,0,0,0.3);
-        }
-        .glass-input {
-            background: rgba(255,255,255,0.07);
-            border: 1px solid rgba(255,255,255,0.12);
-            color: #f1f5f9;
-        }
-        .glass-input:focus {
-            background: rgba(255,255,255,0.10);
-            border-color: rgba(245,158,11,0.5);
-            outline: none;
-            box-shadow: 0 0 0 3px rgba(245,158,11,0.15);
-        }
-        .glass-input::placeholder { color: #64748b; }
         .nav-item {
-            color: #94a3b8;
-            border-radius: 0.75rem;
-            padding: 0.625rem 0.75rem;
             display: flex;
             align-items: center;
-            gap: 0.75rem;
-            transition: all 0.2s ease;
+            gap: 0.625rem;
+            padding: 0.5rem 0.75rem;
+            border-radius: 0.5rem;
             font-size: 0.875rem;
-        }
-        .nav-item:hover {
-            background: rgba(255,255,255,0.08);
-            color: #f1f5f9;
-        }
-        .nav-item.active {
-            background: rgba(245,158,11,0.15);
-            color: #fbbf24;
+            color: #475569;
+            transition: all 0.15s ease;
             font-weight: 500;
-            border: 1px solid rgba(245,158,11,0.2);
         }
-        .nav-item.active svg { color: #f59e0b; }
-        .btn-amber {
-            background: linear-gradient(135deg, #f59e0b, #d97706);
-            color: #0f172a;
-            font-weight: 600;
+        .nav-item:hover { background: #f1f5f9; color: #0f172a; }
+        .nav-item.active {
+            background: #eff6ff;
+            color: #1d4ed8;
+        }
+        .nav-item.active svg { color: #2563eb; }
+
+        .card {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
             border-radius: 0.75rem;
-            padding: 0.625rem 1.25rem;
-            transition: all 0.2s ease;
-            box-shadow: 0 4px 20px rgba(245,158,11,0.25);
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
         }
-        .btn-amber:hover {
-            box-shadow: 0 6px 28px rgba(245,158,11,0.4);
-            transform: translateY(-1px);
-        }
-        .text-muted { color: #64748b; }
-        .text-body { color: #cbd5e1; }
-        .text-heading { color: #f1f5f9; }
-        .badge-amber {
-            background: rgba(245,158,11,0.15);
-            color: #fbbf24;
-            border: 1px solid rgba(245,158,11,0.25);
-            border-radius: 9999px;
-            padding: 0.125rem 0.625rem;
-            font-size: 0.75rem;
+        .btn-primary {
+            background: #0284c7;
+            color: #ffffff;
             font-weight: 600;
+            font-size: 0.875rem;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.375rem;
+            transition: background 0.15s ease;
+            border: none;
+            cursor: pointer;
         }
-        .badge-danger {
-            background: rgba(239,68,68,0.15);
-            color: #f87171;
-            border: 1px solid rgba(239,68,68,0.2);
-            border-radius: 9999px;
-            padding: 0.125rem 0.625rem;
-            font-size: 0.75rem;
+        .btn-primary:hover { background: #0369a1; }
+
+        .btn-secondary {
+            background: #ffffff;
+            color: #334155;
             font-weight: 600;
+            font-size: 0.875rem;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            border: 1px solid #e2e8f0;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.375rem;
+            transition: all 0.15s ease;
+            cursor: pointer;
         }
-        .badge-success {
-            background: rgba(34,197,94,0.15);
-            color: #4ade80;
-            border: 1px solid rgba(34,197,94,0.2);
-            border-radius: 9999px;
-            padding: 0.125rem 0.625rem;
-            font-size: 0.75rem;
-            font-weight: 600;
+        .btn-secondary:hover { background: #f8fafc; border-color: #cbd5e1; }
+
+        .badge-high { background: #fff1f2; color: #be123c; border: 1px solid #fecdd3; border-radius: 9999px; padding: 0.125rem 0.625rem; font-size: 0.75rem; font-weight: 600; }
+        .badge-med { background: #fffbeb; color: #b45309; border: 1px solid #fde68a; border-radius: 9999px; padding: 0.125rem 0.625rem; font-size: 0.75rem; font-weight: 600; }
+        .badge-low { background: #f0fdf4; color: #15803d; border: 1px solid #bbf7d0; border-radius: 9999px; padding: 0.125rem 0.625rem; font-size: 0.75rem; font-weight: 600; }
+        .badge-blue { background: #eff6ff; color: #1d4ed8; border: 1px solid #bfdbfe; border-radius: 9999px; padding: 0.125rem 0.625rem; font-size: 0.75rem; font-weight: 600; }
+
+        .input-field {
+            width: 100%;
+            border: 1px solid #e2e8f0;
+            border-radius: 0.5rem;
+            padding: 0.5rem 0.875rem;
+            font-size: 0.875rem;
+            color: #0f172a;
+            background: #ffffff;
+            transition: all 0.15s ease;
+            outline: none;
         }
-        .divider { border-color: rgba(255,255,255,0.08); }
-        select.glass-input option { background: #1e293b; color: #f1f5f9; }
-        .glass-table th {
-            background: rgba(255,255,255,0.04);
+        .input-field:focus { border-color: #0284c7; box-shadow: 0 0 0 3px rgba(2,132,199,0.1); }
+        .input-field::placeholder { color: #94a3b8; }
+
+        .divider { border: none; border-top: 1px solid #e2e8f0; margin: 0.75rem 0; }
+
+        .toast-success { background: #f0fdf4; border: 1px solid #bbf7d0; color: #15803d; }
+        .toast-error { background: #fff1f2; border: 1px solid #fecdd3; color: #be123c; }
+
+        table th {
+            background: #f8fafc;
             color: #64748b;
-            font-size: 0.7rem;
+            font-size: 0.75rem;
             font-weight: 600;
             text-transform: uppercase;
-            letter-spacing: 0.07em;
+            letter-spacing: 0.05em;
             padding: 0.75rem 1rem;
-            border-bottom: 1px solid rgba(255,255,255,0.08);
+            border-bottom: 1px solid #e2e8f0;
+            text-align: left;
         }
-        .glass-table td {
+        table td {
             padding: 0.875rem 1rem;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-            color: #cbd5e1;
+            border-bottom: 1px solid #f1f5f9;
+            color: #334155;
             font-size: 0.875rem;
         }
-        .glass-table tr:hover td { background: rgba(255,255,255,0.03); }
+        table tbody tr:hover td { background: #f8fafc; }
+        table tbody tr:last-child td { border-bottom: none; }
 
-        /* Scrollbar */
-        ::-webkit-scrollbar { width: 5px; height: 5px; }
-        ::-webkit-scrollbar-track { background: transparent; }
-        ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 99px; }
+        select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='%2394a3b8'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 0.75rem center; background-size: 1rem; padding-right: 2.5rem; -webkit-appearance: none; appearance: none; }
     </style>
     @stack('styles')
 </head>
-<?php header('Cache-Control: no-cache, no-store, must-revalidate; max-age=0');
-header('Pragma: no-cache');
-header('Expires: 0'); ?>
-<body class="font-sans antialiased relative" x-data="{ sidebarOpen: false }">
+<?php header('Cache-Control: no-cache, no-store, must-revalidate; max-age=0'); header('Pragma: no-cache'); header('Expires: 0'); ?>
+<body class="font-sans antialiased" x-data="{ sidebarOpen: false }">
 
-    <!-- Mobile sidebar overlay -->
+    <!-- Mobile overlay -->
     <div x-show="sidebarOpen" x-transition:enter="transition-opacity ease-linear duration-150"
          x-transition:enter-start="opacity-0" x-transition:enter-end="opacity-100"
          x-transition:leave="transition-opacity ease-linear duration-150"
          x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
-         class="fixed inset-0 bg-black/50 z-40 lg:hidden" @click="sidebarOpen = false" aria-hidden="true"></div>
+         class="fixed inset-0 bg-black/40 z-40 lg:hidden" @click="sidebarOpen = false"></div>
 
-    <!-- Sidebar Navigation -->
+    <!-- Sidebar -->
     @auth
-    <aside x-cloak x-show="sidebarOpen" x-transition:enter="transition-transform ease-out duration-300"
+    <aside x-cloak x-show="sidebarOpen"
+           x-transition:enter="transition-transform ease-out duration-200"
            x-transition:enter-start="-translate-x-full" x-transition:enter-end="translate-x-0"
-           x-transition:leave="transition-transform ease-in duration-200"
+           x-transition:leave="transition-transform ease-in duration-150"
            x-transition:leave-start="translate-x-0" x-transition:leave-end="-translate-x-full"
-           class="glass-sidebar fixed inset-y-0 left-0 z-50 w-64 transform lg:!translate-x-0 lg:!block"
-           aria-label="Navigasi utama">
-        <div class="flex flex-col h-full">
-            <!-- Logo & Brand -->
-            <div class="flex items-center justify-between h-16 px-5" style="border-bottom: 1px solid rgba(255,255,255,0.08);">
-                <a href="{{ route('home') }}" class="flex items-center gap-2.5">
-                    <div class="w-8 h-8 rounded-lg flex items-center justify-center" style="background: linear-gradient(135deg, #f59e0b, #d97706);">
-                        <svg class="w-5 h-5 text-slate-900" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
-                    </div>
-                    <span class="font-display font-bold text-white text-lg tracking-tight">SiPeka</span>
-                </a>
-                <button @click="sidebarOpen = false" class="lg:hidden p-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/10 transition-colors" aria-label="Tutup menu">
-                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
-                </button>
-            </div>
+           class="sidebar fixed inset-y-0 left-0 z-50 w-60 flex flex-col lg:!translate-x-0 lg:!block">
 
-            <!-- Navigation -->
-            <nav class="flex-1 px-3 py-4 space-y-0.5 overflow-y-auto" aria-label="Menu navigasi">
-                @if(auth()->user()->isMahasiswa())
-                    @include('partials.nav-mahasiswa')
-                @elseif(auth()->user()->isAdmin())
-                    @include('partials.nav-admin')
-                @elseif(auth()->user()->isPsikolog())
-                    @include('partials.nav-psikolog')
-                @endif
-            </nav>
-
-            <!-- User Profile Bottom -->
-            <div class="p-4" style="border-top: 1px solid rgba(255,255,255,0.08);">
-                <div class="flex items-center gap-3 p-3 rounded-xl" style="background: rgba(255,255,255,0.05);">
-                    <div class="w-9 h-9 rounded-full flex items-center justify-center font-display font-bold text-sm text-slate-900" style="background: linear-gradient(135deg, #f59e0b, #d97706);">
-                        {{ strtoupper(auth()->user()->name[0]) }}
-                    </div>
-                    <div class="flex-1 min-w-0">
-                        <p class="font-medium text-white text-sm truncate">{{ auth()->user()->name }}</p>
-                        <p class="text-xs capitalize" style="color: #64748b;">{{ auth()->user()->role }}</p>
-                    </div>
-                    <a href="{{ route('profile.edit') }}" class="p-1.5 rounded-lg text-slate-400 hover:text-amber-400 hover:bg-white/10 transition-colors" aria-label="Pengaturan profil">
-                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path></svg>
-                    </a>
+        <!-- Brand -->
+        <div class="flex items-center justify-between h-14 px-4" style="border-bottom: 1px solid #e2e8f0;">
+            <a href="{{ route('home') }}" class="flex items-center gap-2">
+                <div class="w-7 h-7 rounded-lg flex items-center justify-center" style="background: #0284c7;">
+                    <svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
                 </div>
+                <span class="font-display font-bold text-slate-900 text-base">SiPeka</span>
+            </a>
+            <button @click="sidebarOpen = false" class="lg:hidden p-1.5 rounded-md text-slate-400 hover:bg-slate-100">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+            </button>
+        </div>
+
+        <!-- Nav -->
+        <nav class="flex-1 px-3 py-3 space-y-0.5 overflow-y-auto">
+            @if(auth()->user()->isMahasiswa())
+                @include('partials.nav-mahasiswa')
+            @elseif(auth()->user()->isAdmin())
+                @include('partials.nav-admin')
+            @elseif(auth()->user()->isPsikolog())
+                @include('partials.nav-psikolog')
+            @endif
+        </nav>
+
+        <!-- User -->
+        <div class="p-3" style="border-top: 1px solid #e2e8f0;">
+            <div class="flex items-center gap-2.5 px-2 py-2 rounded-lg hover:bg-slate-50 transition-colors">
+                <div class="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold text-white flex-shrink-0" style="background: #0284c7;">
+                    {{ strtoupper(auth()->user()->name[0]) }}
+                </div>
+                <div class="flex-1 min-w-0">
+                    <p class="text-sm font-medium text-slate-900 truncate">{{ auth()->user()->name }}</p>
+                    <p class="text-xs text-slate-400 capitalize">{{ auth()->user()->role }}</p>
+                </div>
+                <a href="{{ route('profile.edit') }}" class="p-1 rounded text-slate-400 hover:text-slate-600 hover:bg-slate-100 transition-colors">
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+                </a>
             </div>
         </div>
     </aside>
     @endauth
 
-    <!-- Main Content Wrapper -->
-    <div class="{{ auth()->check() ? 'lg:ml-64' : '' }} min-h-screen flex flex-col relative z-10">
-        <!-- Top Bar -->
-        <header class="glass-topbar sticky top-0 z-30">
-            <div class="flex items-center justify-between h-16 px-4 lg:px-8">
-                <!-- Mobile menu button -->
-                <button @click="sidebarOpen = true" class="lg:hidden p-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/10 transition-colors" aria-label="Buka menu">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+    <!-- Main -->
+    <div class="{{ auth()->check() ? 'lg:ml-60' : '' }} min-h-screen flex flex-col">
+        <!-- Topbar -->
+        <header class="topbar sticky top-0 z-30">
+            <div class="flex items-center h-14 px-4 lg:px-6 gap-3">
+                <button @click="sidebarOpen = true" class="lg:hidden p-1.5 rounded-md text-slate-400 hover:bg-slate-100">
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
                 </button>
-
-                <!-- Page Title / Brand for mobile -->
-                <div class="flex items-center gap-3 lg:hidden flex-1 ml-3">
-                    <div class="w-7 h-7 rounded-md flex items-center justify-center" style="background: linear-gradient(135deg, #f59e0b, #d97706);">
-                        <svg class="w-4 h-4 text-slate-900" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                <div class="flex items-center gap-2 lg:hidden">
+                    <div class="w-6 h-6 rounded flex items-center justify-center" style="background: #0284c7;">
+                        <svg class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
                     </div>
-                    <span class="font-display font-bold text-white">SiPeka</span>
+                    <span class="font-display font-bold text-slate-900 text-sm">SiPeka</span>
                 </div>
 
-                <!-- Right side actions -->
-                <div class="flex items-center gap-2 ml-auto">
+                <div class="ml-auto flex items-center gap-2">
                     @if(session('success'))
-                        <div x-data="{ show: true }" x-init="setTimeout(() => show = false, 5000)"
+                        <div x-data="{ show: true }" x-init="setTimeout(() => show = false, 4000)"
                              x-show="show" x-transition.opacity
-                             class="flex items-center gap-2 px-3 py-1.5 rounded-xl text-sm" style="background: rgba(34,197,94,0.15); color: #4ade80; border: 1px solid rgba(34,197,94,0.2);">
-                            <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                             class="toast-success flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium">
+                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                             {{ session('success') }}
                         </div>
                     @endif
                     @if(session('error'))
-                        <div x-data="{ show: true }" x-init="setTimeout(() => show = false, 5000)"
+                        <div x-data="{ show: true }" x-init="setTimeout(() => show = false, 4000)"
                              x-show="show" x-transition.opacity
-                             class="flex items-center gap-2 px-3 py-1.5 rounded-xl text-sm" style="background: rgba(239,68,68,0.15); color: #f87171; border: 1px solid rgba(239,68,68,0.2);">
-                            <svg class="w-4 h-4 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                             class="toast-error flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium">
+                            <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                             {{ session('error') }}
                         </div>
                     @endif
 
                     @auth
-                        <div class="hidden lg:flex items-center gap-2">
-                            <a href="{{ route('home') }}" class="flex items-center gap-1.5 px-3 py-2 rounded-xl text-slate-400 hover:text-white hover:bg-white/10 transition-colors text-sm" title="Ke Halaman Utama">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l9-9 9 9M5 10v10a1 1 0 001 1h3m10-11v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
-                                <span>Beranda</span>
-                            </a>
-                            <div class="w-px h-5" style="background: rgba(255,255,255,0.1);"></div>
-                            <a href="{{ route('profile.edit') }}" class="flex items-center gap-2 px-3 py-2 rounded-xl hover:bg-white/10 transition-colors">
-                                <div class="w-7 h-7 rounded-full flex items-center justify-center text-xs font-bold text-slate-900" style="background: linear-gradient(135deg, #f59e0b, #d97706);">
-                                    {{ strtoupper(auth()->user()->name[0]) }}
-                                </div>
-                                <span class="text-sm font-medium text-slate-300">{{ auth()->user()->name }}</span>
-                            </a>
-                            <form method="POST" action="{{ route('logout') }}">
-                                @csrf
-                                <button class="p-2 rounded-xl text-slate-400 hover:text-red-400 hover:bg-white/10 transition-colors" aria-label="Keluar" title="Keluar">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
-                                </button>
-                            </form>
+                    <a href="{{ route('home') }}" class="hidden lg:flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-slate-500 hover:text-slate-900 hover:bg-slate-100 text-xs font-medium transition-colors">
+                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l9-9 9 9M5 10v10a1 1 0 001 1h3m10-11v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+                        Beranda
+                    </a>
+                    <div class="hidden lg:block w-px h-4 bg-slate-200"></div>
+                    <a href="{{ route('profile.edit') }}" class="hidden lg:flex items-center gap-1.5 px-2.5 py-1.5 rounded-md hover:bg-slate-100 transition-colors">
+                        <div class="w-6 h-6 rounded-full flex items-center justify-center text-xs font-bold text-white" style="background: #0284c7;">
+                            {{ strtoupper(auth()->user()->name[0]) }}
                         </div>
+                        <span class="text-xs font-medium text-slate-700">{{ auth()->user()->name }}</span>
+                    </a>
+                    <form method="POST" action="{{ route('logout') }}">
+                        @csrf
+                        <button class="hidden lg:flex p-1.5 rounded-md text-slate-400 hover:text-red-500 hover:bg-red-50 transition-colors" title="Keluar">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+                        </button>
+                    </form>
                     @else
-                        <div class="hidden lg:flex items-center gap-3">
-                            <a href="{{ route('login') }}" class="text-sm font-medium text-slate-300 hover:text-amber-400 transition-colors">Masuk</a>
-                        </div>
+                    <a href="{{ route('login') }}" class="btn-primary text-xs">Masuk</a>
                     @endauth
                 </div>
             </div>
         </header>
 
-        <!-- Page Content -->
-        <main class="flex-1 p-4 lg:p-8">
+        <!-- Content -->
+        <main class="flex-1 p-4 lg:p-6">
             @yield('content')
         </main>
 
         <!-- Footer -->
-        <footer class="py-5 px-4 lg:px-8" style="border-top: 1px solid rgba(255,255,255,0.06);">
-            <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between gap-2 text-xs" style="color: #475569;">
-                <p>&copy; {{ date('Y') }} SiPeka — Sistem Skrining Kecemasan Mahasiswa</p>
-                <p>Dikembangkan dengan IndoBERT + HARS · STIKOM Yos Sudarso Purwokerto</p>
+        <footer class="px-6 py-4" style="border-top: 1px solid #f1f5f9;">
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-1 text-xs text-slate-400">
+                <span>&copy; {{ date('Y') }} SiPeka — Sistem Skrining Kecemasan Mahasiswa</span>
+                <span>STIKOM Yos Sudarso Purwokerto · IndoBERT + HARS</span>
             </div>
         </footer>
     </div>
