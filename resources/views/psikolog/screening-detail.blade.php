@@ -7,7 +7,7 @@
         'sedang' => ['bg' => 'bg-warm-50',      'text' => 'text-warm-800',    'border' => 'border-warm-300',    'dot' => 'bg-warm-500'],
         'tinggi' => ['bg' => 'bg-danger-50',    'text' => 'text-danger-800',  'border' => 'border-danger-200',  'dot' => 'bg-danger-500'],
     ];
-    $r = $riskStyles[$screening->risk_level];
+    $r = $riskStyles[$screening->risk_level] ?? ['bg' => 'bg-calm-50', 'text' => 'text-calm-800', 'border' => 'border-calm-200', 'dot' => 'bg-calm-500'];
     $harsLabel = $screening->hars_score < 14 ? 'Tidak cemas'
                : ($screening->hars_score < 21 ? 'Ringan'
                : ($screening->hars_score < 28 ? 'Sedang' : 'Berat'));

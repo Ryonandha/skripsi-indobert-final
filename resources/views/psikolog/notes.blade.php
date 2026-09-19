@@ -36,7 +36,9 @@
                                 </div>
                             </td>
                             <td class="py-4 px-4">
-                                <?php $rc = ['rendah'=>'bg-primary-50 text-primary-700','sedang'=>'bg-warm-50 text-warm-700','tinggi'=>'bg-danger-50 text-danger-700'][$s->risk_level]; ?>
+                                @php
+                                    $rc = ['rendah'=>'bg-primary-50 text-primary-700','sedang'=>'bg-warm-50 text-warm-700','tinggi'=>'bg-danger-50 text-danger-700'][$s->risk_level] ?? 'text-calm-700 bg-calm-50';
+                                @endphp
                                 <div class="flex flex-col gap-1">
                                     <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-semibold {{ $rc }} capitalize">
                                         Risiko {{ $s->risk_level }}

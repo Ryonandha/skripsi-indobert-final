@@ -36,7 +36,7 @@
                     </div>
                     <div class="flex-1 min-w-0">
                         <div class="flex items-center gap-2 flex-wrap">
-                            <span class="font-semibold text-calm-900 text-sm">{{ $msg->psychologist->name }}</span>
+                            <span class="font-semibold text-calm-900 text-sm">{{ $msg->psychologist->name ?? 'Psikolog' }}</span>
                             <span class="text-xs text-calm-400">Psikolog</span>
                             @unless($msg->is_read)
                                 <span class="inline-flex items-center px-2 py-0.5 rounded-full bg-primary-100 text-primary-700 text-xs font-semibold">Baru</span>

@@ -101,7 +101,7 @@
                                 </div>
                                 <div class="w-px h-8 bg-calm-200 mx-3 sm:my-0 hidden sm:block"></div>
                                 <div class="text-center sm:text-left min-w-[140px]">
-                                    <?php $rc = ['rendah'=>'bg-primary-50 text-primary-700','sedang'=>'bg-warm-50 text-warm-700','tinggi'=>'bg-danger-50 text-danger-700'][$latestScreening->risk_level]; ?>
+                                    <?php $rc = ['rendah'=>'bg-primary-50 text-primary-700','sedang'=>'bg-warm-50 text-warm-700','tinggi'=>'bg-danger-50 text-danger-700'][$latestScreening->risk_level] ?? 'bg-calm-50 text-calm-700'; ?>
                                     <p class="text-xs text-calm-500">Risk Level</p>
                                     <span class="inline-flex items-center px-2 py-1 rounded-full text-xs font-semibold {{ $rc }}">
                                         {{ ucfirst($latestScreening->risk_level) }}

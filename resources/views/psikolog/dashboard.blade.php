@@ -118,7 +118,7 @@
                         <?php
                             $rc = ['rendah'=>'bg-primary-50 text-primary-700 border-primary-200',
                                    'sedang'=>'bg-warm-50 text-warm-700 border-warm-200',
-                                   'tinggi'=>'bg-danger-50 text-danger-700 border-danger-200'][$s->risk_level];
+                                   'tinggi'=>'bg-danger-50 text-danger-700 border-danger-200'][$s->risk_level] ?? 'bg-calm-50 text-calm-700 border-calm-200';
                         ?>
                         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3 p-4 rounded-xl {{ $rc }} border">
                             <div class="flex items-center gap-3">
