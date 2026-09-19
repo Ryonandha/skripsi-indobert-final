@@ -291,6 +291,53 @@
     </div>
 </div>
 
+<!-- MENGENAL SIPEKA -->
+<div style="background: #fff; border-bottom: 1px solid #e2e8f0;">
+    <div class="section">
+        <div style="margin-bottom: 48px; text-align: center;">
+            <div class="section-label">Mengenal SiPeka</div>
+            <div class="section-title">Filosofi Maskot &amp; Logo</div>
+            <div class="section-desc">Identitas visual yang mewakili visi perlindungan dan dukungan emosional</div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 48px; align-items: center; margin-bottom: 72px;">
+            <div style="text-align: center; background: #f8fafc; padding: 24px; border-radius: 20px; border: 1px solid #e2e8f0;">
+                <img src="{{ asset('images/awal_menyambut.png') }}" alt="Maskot SiPeka" style="max-width: 100%; height: auto; max-height: 280px; mix-blend-mode: multiply; margin: 0 auto;">
+            </div>
+            <div>
+                <h3 style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 1.25rem; color: #0f172a; margin-bottom: 16px;">Makna Burung Hantu sebagai Maskot</h3>
+                <p style="font-size: 0.9375rem; color: #475569; line-height: 1.75; margin-bottom: 16px;">
+                    Burung hantu dipilih sebagai maskot SiPeka karena secara simbolis merepresentasikan kepekaan dan perhatian. Karakteristik tersebut relevan dengan fungsi SiPeka yang melakukan skrining awal terhadap risiko kecemasan mahasiswa dengan memperhatikan dua sumber informasi, yaitu respons HARS dan narasi yang dianalisis menggunakan IndoBERT.
+                </p>
+                <p style="font-size: 0.9375rem; color: #475569; line-height: 1.75;">
+                    Desain burung hantu kemudian dibuat dengan ekspresi yang tenang dan bersahabat untuk merepresentasikan SiPeka sebagai pendamping dalam proses skrining, bukan sebagai pengganti tenaga profesional atau alat diagnosis.
+                </p>
+            </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 48px; align-items: center;">
+            <div style="text-align: center; background: #f8fafc; padding: 24px; border-radius: 20px; border: 1px solid #e2e8f0;" class="md-order-2">
+                <img src="{{ asset('images/makna_logo.png') }}" alt="Logo SiPeka" style="max-width: 100%; height: auto; max-height: 320px; mix-blend-mode: multiply; margin: 0 auto;">
+            </div>
+            <div class="md-order-1">
+                <h3 style="font-family: 'Plus Jakarta Sans', sans-serif; font-weight: 700; font-size: 1.25rem; color: #0f172a; margin-bottom: 16px;">Filosofi Logo SiPeka</h3>
+                <p style="font-size: 0.9375rem; color: #475569; line-height: 1.75; margin-bottom: 16px;">
+                    Logo SiPeka merupakan perpaduan antara burung hantu, bentuk huruf "S", dan elemen visual yang menyerupai pelukan atau perisai. Burung hantu merepresentasikan kepekaan, pengamatan, dan kesadaran terhadap kondisi diri, sementara mata yang besar menggambarkan kemampuan untuk mengenali tanda-tanda kecemasan sejak dini.
+                </p>
+                <p style="font-size: 0.9375rem; color: #475569; line-height: 1.75;">
+                    Bentuk "S" yang mengelilingi burung hantu memberikan makna perlindungan, dukungan, dan ruang yang aman bagi mahasiswa. Dominasi warna biru merepresentasikan ketenangan, rasa aman, dan kepercayaan, sedangkan aksen kuning memberikan kesan kehangatan dan harapan. Keseluruhan identitas dirancang dengan pendekatan yang ramah dan modern agar SiPeka tidak terasa seperti sistem klinis yang kaku, tetapi sebagai teman digital yang membantu mahasiswa mengenali, memahami, dan merespons kondisi dirinya dengan lebih baik.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<style>
+    @media(min-width: 768px) {
+        .md-order-1 { order: -1; }
+        .md-order-2 { order: 2; }
+    }
+</style>
+
 <!-- EDUKASI -->
 @php $educations = \App\Models\Education::where('is_published', true)->latest()->take(3)->get(); @endphp
 @if($educations->count())
