@@ -43,18 +43,22 @@
         <div class="flex flex-col sm:flex-row sm:items-center gap-5">
             @php
                 // Map IndoBERT emotion label to mascot image
-                $emotionImages = [
-                    'fear'      => 'fear.png',
-                    'sadness'   => 'saddnes.png',
-                    'anger'     => 'anger.png',
-                    'happy'     => 'happy.png',
-                    'neutral'   => 'non_distres.png',
-                    'non_distress' => 'non_distres.png',
-                    'joy'       => 'happy.png',
-                    'surprise'  => 'awal_menyambut.png',
-                ];
                 $emotionKey = strtolower($screening->emotion_label ?? '');
-                $emotionImg = $emotionImages[$emotionKey] ?? 'awal_menyambut.png';
+                
+                // Emosi positif/netral akan diacak dari gambar-gambar ceria
+                $positiveEmotions = ['happy', 'neutral', 'non_distress', 'joy', 'surprise'];
+                $positiveImages = ['happy.png', 'non_distres.png', 'santai.png', 'love.png', 'cute.png'];
+                
+                if (in_array($emotionKey, $positiveEmotions)) {
+                    $emotionImg = $positiveImages[array_rand($positiveImages)];
+                } else {
+                    $emotionImages = [
+                        'fear'      => 'fear.png',
+                        'sadness'   => 'saddnes.png',
+                        'anger'     => 'anger.png',
+                    ];
+                    $emotionImg = $emotionImages[$emotionKey] ?? 'awal_menyambut.png';
+                }
             @endphp
             <img src="{{ asset('images/' . $emotionImg) }}" alt="{{ $screening->emotion_label }}"
                  class="w-20 h-20 object-contain flex-shrink-0 hidden sm:block"

@@ -78,9 +78,9 @@
                         </div>
                         <div class="rounded-lg border border-slate-100 bg-slate-50 p-4">
                             <p class="text-xs text-slate-500 font-medium">Sentimen AI</p>
-                            <p class="font-display text-lg font-bold text-slate-900 mt-1">{{ $latest->sentiment_label ?? '—' }}</p>
-                            @if($latest->sentiment_score)
-                                <p class="text-xs text-slate-400 mt-0.5">{{ number_format($latest->sentiment_score * 100, 1) }}% keyakinan</p>
+                            <p class="font-display text-lg font-bold text-slate-900 mt-1">{{ $latest->emotion_label ?? '—' }}</p>
+                            @if($latest->emotion_confidence)
+                                <p class="text-xs text-slate-400 mt-0.5">{{ number_format($latest->emotion_confidence * 100, 1) }}% keyakinan</p>
                             @endif
                         </div>
                     </div>
