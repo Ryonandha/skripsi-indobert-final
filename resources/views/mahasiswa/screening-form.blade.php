@@ -205,7 +205,8 @@ document.querySelectorAll('[data-hars-group]').forEach(function(group) {
 // ── Loading overlay fullscreen ──
 document.getElementById('screeningForm').addEventListener('submit', function(e) {
     document.getElementById('loadingOverlay').classList.add('show');
-    document.getElementById('submitBtn').disabled = true;
+    // Do not disable submitBtn here as it can cancel the form submission in Safari/Chrome.
+    // The overlay has z-index 9998 and covers the entire screen, preventing double clicks.
 });
 </script>
 @endpush
