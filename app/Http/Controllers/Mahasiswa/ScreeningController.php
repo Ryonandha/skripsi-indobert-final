@@ -200,6 +200,14 @@ class ScreeningController extends Controller
             || $last->created_at->addDays(self::HARS_COOLDOWN_DAYS)->isPast();
     }
 
+    public function destroy(Screening $screening)
+    {
+        $this->authorizeAccess($screening);
+        $screening->delete();
+        return redirect()->route('mahasiswa.history')
+            ->with('success', 'Riwayat skrining berhasil dihapus.');
+    }
+
     protected function authorizeAccess(Screening $screening): void
     {
         abort_unless($screening->user_id === auth()->id(), 403);

@@ -52,6 +52,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/riwayat', [ScreeningController::class, 'history'])->name('history');
         Route::get('/{screening}', [ScreeningController::class, 'show'])->name('screening.show');
         Route::post('/{screening}/consent', [ScreeningController::class, 'consent'])->name('consent');
+        Route::delete('/{screening}', [ScreeningController::class, 'destroy'])->name('screening.destroy');
     });
 
     // ---- Notifikasi Mahasiswa (pesan dari psikolog) ----
