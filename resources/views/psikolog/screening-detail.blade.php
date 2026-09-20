@@ -98,18 +98,29 @@
             <p class="text-sm leading-relaxed text-calm-700">{{ $screening->recommendation }}</p>
         </div>
         <div class="bg-white rounded-xl border border-calm-200 p-5">
-            <h2 class="text-xs font-semibold uppercase tracking-wide text-calm-400 mb-3">Catatan Penanganan</h2>
-            @if($screening->handling_notes)
-                <p class="text-sm leading-relaxed text-calm-700">{{ $screening->handling_notes }}</p>
-                <p class="text-xs text-calm-400 mt-3">— {{ $screening->handler->name ?? 'Psikolog' }}, {{ $screening->updated_at->format('d M Y H:i') }}</p>
-            @else
-                <p class="text-sm text-calm-400 italic">Belum ada catatan penanganan.</p>
-                <a href="{{ route('psikolog.patient-detail', $student) }}#penanganan"
-                   class="inline-flex items-center gap-1.5 mt-3 text-sm font-medium text-primary-700 hover:text-primary-800">
-                    Tulis catatan
-                    <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
-                </a>
-            @endif
+            <h2 class="text-xs font-semibold uppercase tracking-wide text-calm-400 mb-3">Update Penanganan</h2>
+            <form method="POST" action="{{ route('psikolog.handling', $screening) }}" class="space-y-4">
+                @csrf
+                <div>
+                    <label class="block text-xs font-medium text-calm-600 mb-1">Status Penanganan</label>
+                    <select name="handling_status" class="w-full px-3 py-2 border border-calm-200 rounded-lg focus:ring-2 focus:ring-primary-500 outline-none text-sm">
+                        @foreach(['belum','diproses','selesai'] as $st)
+                            <option value="{{ $st }}" {{ $screening->handling_status === $st ? 'selected' : '' }}>
+                                {{ ucfirst($st) }}
+                            </option>
+                        @endforeach
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs font-medium text-calm-600 mb-1">Catatan Progres</label>
+                    <textarea name="handling_notes" rows="3"
+                              placeholder="Tulis catatan sesi konseling, observasi, dll."
+                              class="w-full px-3 py-2 border border-calm-200 rounded-lg focus:ring-2 focus:ring-primary-500 outline-none text-sm resize-none">{{ $screening->handling_notes }}</textarea>
+                </div>
+                <button type="submit" class="px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded-lg text-sm font-medium transition-colors w-full sm:w-auto">
+                    Simpan Perubahan
+                </button>
+            </form>
         </div>
     </div>
 

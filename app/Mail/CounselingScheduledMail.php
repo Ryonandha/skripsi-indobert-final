@@ -28,6 +28,9 @@ class CounselingScheduledMail extends Mailable
     {
         return new Envelope(
             subject: 'Jadwal Konseling Baru — ' . config('app.name'),
+            replyTo: [
+                new \Illuminate\Mail\Mailables\Address($this->psychologist->email, $this->psychologist->name)
+            ],
         );
     }
 

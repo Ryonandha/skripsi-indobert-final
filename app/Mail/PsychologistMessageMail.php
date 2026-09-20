@@ -29,6 +29,9 @@ class PsychologistMessageMail extends Mailable
     {
         return new Envelope(
             subject: 'Pesan dari Konselor Kampus — ' . config('app.name'),
+            replyTo: [
+                new \Illuminate\Mail\Mailables\Address($this->psychologist->email, $this->psychologist->name)
+            ],
         );
     }
 

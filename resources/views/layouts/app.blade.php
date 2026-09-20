@@ -32,7 +32,7 @@
                             50: '#fff1f2', 100: '#ffe4e6', 400: '#fb7185',
                             500: '#ef4444', 600: '#dc2626', 700: '#b91c1c',
                         },
-                        warn: {
+                        warm: {
                             50: '#fffbeb', 100: '#fef3c7', 400: '#fbbf24',
                             500: '#f59e0b', 600: '#d97706', 700: '#b45309',
                         },
@@ -304,7 +304,7 @@
            x-transition:enter-start="-translate-x-full" x-transition:enter-end="translate-x-0"
            x-transition:leave="transition-transform ease-in duration-150"
            x-transition:leave-start="translate-x-0" x-transition:leave-end="-translate-x-full"
-           class="sidebar fixed inset-y-0 left-0 z-50 w-60 flex flex-col lg:!translate-x-0 lg:!block">
+           class="sidebar fixed inset-y-0 left-0 z-50 w-60 flex flex-col lg:!translate-x-0 lg:!flex">
 
         <!-- Brand -->
         <div class="flex items-center justify-between h-14 px-4" style="border-bottom: 1px solid #e2e8f0;">
