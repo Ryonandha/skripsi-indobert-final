@@ -16,7 +16,8 @@ use Illuminate\Support\Facades\Route;
  // Publik
 Route::get('/', fn () => view('welcome'))->name('home');
 
- // Public education detail
+// Public education
+Route::get('/edukasi', [EducationController::class, 'publicIndex'])->name('education.index');
 Route::get('/edukasi/{education:slug}', [EducationController::class, 'show'])->name('education.show');
 
 // Auth

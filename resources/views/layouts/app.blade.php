@@ -351,10 +351,12 @@
         <!-- Topbar -->
         <header class="topbar sticky top-0 z-30">
             <div class="flex items-center h-14 px-4 lg:px-6 gap-3">
+                @auth
                 <button @click="sidebarOpen = true" class="lg:hidden p-1.5 rounded-md text-slate-400 hover:bg-slate-100">
                     <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
                 </button>
-                <div class="flex items-center gap-2 lg:hidden">
+                @endauth
+                <div class="flex items-center gap-2 {{ auth()->check() ? 'lg:hidden' : '' }}">
                     <img src="{{ asset('images/logo_web.png') }}" alt="SiPeka" class="w-8 h-8 object-contain">
                     <span class="font-display font-bold text-slate-900 text-sm">SiPeka</span>
                 </div>

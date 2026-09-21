@@ -377,13 +377,19 @@
             <a href="{{ route('education.show', $edu->slug) }}" class="article-card">
                 <div class="article-tag">Artikel Edukasi</div>
                 <div class="article-title">{{ $edu->title }}</div>
-                <div class="article-excerpt">{{ strip_tags($edu->content) }}</div>
+                <div class="article-excerpt">{{ Str::limit(strip_tags($edu->content), 120) }}</div>
                 <div class="article-more">
                     Baca selengkapnya
                     <svg width="13" height="13" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
                 </div>
             </a>
             @endforeach
+        </div>
+        <div style="text-align: center; margin-top: 40px;">
+            <a href="{{ route('education.index') }}" class="btn btn-outline" style="padding: 12px 24px;">
+                Lihat Semua Artikel Edukasi
+                <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" style="margin-left: 4px;"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/></svg>
+            </a>
         </div>
     </div>
 </div>

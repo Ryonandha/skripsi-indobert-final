@@ -2,11 +2,24 @@
 @section('title', $education->title)
 
 @section('content')
+@php
+    $prev = url()->previous();
+    if (str_contains($prev, 'dashboard')) {
+        $backUrl = route('dashboard');
+        $backText = 'Kembali ke Dashboard';
+    } elseif ($prev === route('home') || $prev === route('home').'/') {
+        $backUrl = route('home');
+        $backText = 'Kembali ke Beranda';
+    } else {
+        $backUrl = route('education.index');
+        $backText = 'Kembali ke Edukasi';
+    }
+@endphp
 <div class="max-w-3xl mx-auto animate-fade-in">
     <!-- Back Button -->
-    <a href="{{ route('dashboard') }}" class="inline-flex items-center gap-2 text-calm-500 hover:text-calm-700 text-sm font-medium mb-6 transition-colors">
+    <a href="{{ $backUrl }}" class="inline-flex items-center gap-2 text-calm-500 hover:text-calm-700 text-sm font-medium mb-6 transition-colors">
         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/></svg>
-        Kembali ke Dashboard
+        {{ $backText }}
     </a>
 
     <!-- Article Card -->
@@ -37,8 +50,8 @@
                     Bagikan
                 </button>
             </div>
-            <a href="{{ route('dashboard') }}" class="px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded-xl text-sm font-medium transition-colors">
-                Kembali ke Dashboard
+            <a href="{{ $backUrl }}" class="px-4 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded-xl text-sm font-medium transition-colors">
+                {{ $backText }}
             </a>
         </div>
     </article>
