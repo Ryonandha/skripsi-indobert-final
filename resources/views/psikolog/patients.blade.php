@@ -61,18 +61,25 @@
                 $latestScreening = $student->screenings->first();
                 $hasHighRisk = $student->screenings->contains('risk_level', 'tinggi');
                 $hasConsent = $student->screenings->contains('consent_followup', true);
+                $hasUnreadReply = \App\Models\Message::where('student_id', $student->id)->where('is_from_student', true)->where('is_read', false)->exists();
             @endphp
-            <div class="bg-white rounded-2xl shadow-card border border-calm-100 overflow-hidden overflow-x-auto hover:shadow-card-hover transition-shadow duration-300">
+            <div class="bg-white rounded-2xl shadow-card border {{ $hasUnreadReply ? 'border-primary-300 ring-2 ring-primary-100' : 'border-calm-100' }} overflow-hidden overflow-x-auto hover:shadow-card-hover transition-shadow duration-300">
                 <div class="p-5">
                     <div class="flex flex-col sm:flex-row sm:items-center gap-4">
                         <!-- Avatar & Info -->
                         <div class="flex items-center gap-4 flex-1 min-w-0">
-                            <div class="w-14 h-14 rounded-full bg-primary-100 flex items-center justify-center flex-shrink-0">
-                                <span class="font-display font-bold text-primary-700 text-lg">{{ strtoupper($student->name[0]) }}</span>
+                            <div class="w-14 h-14 rounded-full {{ $hasUnreadReply ? 'bg-primary-600 text-white' : 'bg-primary-100 text-primary-700' }} flex items-center justify-center flex-shrink-0">
+                                <span class="font-display font-bold text-lg">{{ strtoupper($student->name[0]) }}</span>
                             </div>
                             <div class="min-w-0">
-                                <div class="flex items-center gap-3 flex-wrap">
+                                <div class="flex items-center gap-2 flex-wrap">
                                     <h3 class="font-semibold text-calm-900 truncate">{{ $student->name }}</h3>
+                                    @if($hasUnreadReply)
+                                        <span class="px-2 py-0.5 bg-primary-600 text-white text-xs font-semibold rounded-full flex items-center gap-1">
+                                            <span class="w-1.5 h-1.5 rounded-full bg-white animate-ping"></span>
+                                            Ada Balasan
+                                        </span>
+                                    @endif
                                     @if($hasHighRisk)
                                         <span class="px-2 py-0.5 bg-danger-50 text-danger-700 text-xs font-semibold rounded-full">Risiko Tinggi</span>
                                     @elseif($latestScreening && $latestScreening->risk_level === 'sedang')
@@ -112,10 +119,10 @@
 
                         <!-- Actions -->
                         <div class="flex flex-wrap gap-2 sm:ml-auto">
-                            <a href="{{ route('psikolog.patient-detail', $student) }}"
-                               class="px-4 py-2 bg-calm-100 hover:bg-calm-200 text-calm-700 rounded-xl text-sm font-medium transition-colors flex items-center gap-1">
+                            <a href="{{ route('psikolog.patient-detail', $student) }}{{ $hasUnreadReply ? '#percakapan' : '' }}"
+                               class="px-4 py-2 {{ $hasUnreadReply ? 'bg-primary-600 hover:bg-primary-700 text-white font-semibold shadow-sm' : 'bg-calm-100 hover:bg-calm-200 text-calm-700' }} rounded-xl text-sm font-medium transition-colors flex items-center gap-1">
                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
-                                Detail
+                                {{ $hasUnreadReply ? 'Buka Balasan' : 'Detail' }}
                             </a>
 
                             @if($hasConsent)

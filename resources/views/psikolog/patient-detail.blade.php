@@ -1,4 +1,4 @@
-﻿@extends('layouts.app')
+@extends('layouts.app')
 @section('title', 'Detail Pasien')
 
 @section('content')
@@ -49,6 +49,43 @@
                 Kirim Email Undangan
             </button>
         </form>
+    </div>
+    @endif
+
+    <!-- Riwayat Percakapan & Balasan Mahasiswa -->
+    @if(isset($messages) && $messages->count())
+    <div id="percakapan" class="mb-6 bg-white rounded-2xl shadow-card border border-calm-100 p-6">
+        <h2 class="font-display text-lg font-semibold text-calm-900 flex items-center gap-2 mb-4">
+            <svg class="w-5 h-5 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/></svg>
+            Riwayat Komunikasi & Balasan Mahasiswa
+            <span class="text-xs px-2 py-0.5 rounded-full bg-calm-100 text-calm-600 font-normal">({{ $messages->count() }} pesan)</span>
+        </h2>
+        <div class="space-y-3 max-h-96 overflow-y-auto pr-1">
+            @foreach($messages as $m)
+                @if($m->is_from_student)
+                    {{-- Balasan dari Mahasiswa --}}
+                    <div class="bg-primary-50 border border-primary-200 rounded-xl p-4 mr-4 sm:mr-8">
+                        <div class="flex items-center justify-between text-xs text-primary-800 font-semibold mb-1">
+                            <span class="flex items-center gap-1.5">
+                                <span class="w-2 h-2 rounded-full bg-primary-600"></span>
+                                Balasan dari {{ $student->name }} (Mahasiswa)
+                            </span>
+                            <span class="text-calm-400 font-normal">{{ $m->created_at->setTimezone('Asia/Jakarta')->format('d M Y H:i') }} WIB</span>
+                        </div>
+                        <p class="text-calm-800 text-sm whitespace-pre-line leading-relaxed mt-1">{{ $m->body }}</p>
+                    </div>
+                @else
+                    {{-- Pesan dari Psikolog --}}
+                    <div class="bg-calm-50 border border-calm-200 rounded-xl p-4 ml-4 sm:ml-8">
+                        <div class="flex items-center justify-between text-xs text-calm-600 font-semibold mb-1">
+                            <span>Undangan dari: {{ $m->psychologist->name ?? 'Konselor' }}</span>
+                            <span class="text-calm-400 font-normal">{{ $m->created_at->setTimezone('Asia/Jakarta')->format('d M Y H:i') }} WIB</span>
+                        </div>
+                        <p class="text-calm-700 text-sm whitespace-pre-line leading-relaxed mt-1">{{ $m->body }}</p>
+                    </div>
+                @endif
+            @endforeach
+        </div>
     </div>
     @endif
 

@@ -69,6 +69,36 @@
         </div>
     @endif
 
+    <!-- Alert: Balasan Baru dari Mahasiswa -->
+    @if(isset($studentReplies) && $studentReplies->count() > 0)
+        <div class="mb-6 bg-primary-50 border border-primary-200 rounded-2xl p-5 animate-slide-down">
+            <div class="flex items-start gap-3">
+                <div class="w-10 h-10 rounded-xl bg-primary-600 flex items-center justify-center flex-shrink-0">
+                    <svg class="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/></svg>
+                </div>
+                <div class="flex-1">
+                    <h3 class="font-display font-semibold text-primary-900">{{ $studentReplies->count() }} Balasan Pesan Baru dari Mahasiswa</h3>
+                    <p class="text-primary-700 text-sm mt-0.5">Ada mahasiswa yang membalas undangan konseling. Klik untuk membuka detail:</p>
+                    <div class="mt-3 space-y-2">
+                        @foreach($studentReplies as $reply)
+                            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-2 p-3 bg-white rounded-xl border border-primary-100 shadow-sm text-sm">
+                                <div class="flex items-center gap-2 flex-wrap">
+                                    <span class="w-2 h-2 rounded-full bg-primary-600"></span>
+                                    <span class="font-semibold text-calm-900">{{ $reply->student->name ?? 'Mahasiswa' }}</span>
+                                    <span class="text-xs text-calm-400">({{ $reply->created_at->setTimezone('Asia/Jakarta')->diffForHumans() }})</span>
+                                    <span class="text-xs text-calm-600 truncate max-w-sm block">"{{ Str::limit($reply->body, 55) }}"</span>
+                                </div>
+                                <a href="{{ route('psikolog.patient-detail', $reply->student_id) }}#percakapan" class="inline-flex items-center gap-1 text-xs font-semibold text-primary-700 hover:text-primary-800 self-end sm:self-auto flex-shrink-0">
+                                    Buka Percakapan →
+                                </a>
+                            </div>
+                        @endforeach
+                    </div>
+                </div>
+            </div>
+        </div>
+    @endif
+
     <!-- Stats Cards -->
     <div class="grid grid-cols-2 lg:grid-cols-5 gap-4 mb-8">
         @foreach([

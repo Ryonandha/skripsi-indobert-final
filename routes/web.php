@@ -61,6 +61,7 @@ Route::middleware('auth')->group(function () {
         Route::get('/', [NotificationController::class, 'index'])->name('index');
         Route::post('/{message}/baca', [NotificationController::class, 'markRead'])->name('read');
         Route::post('/baca-semua', [NotificationController::class, 'markAllRead'])->name('readAll');
+        Route::post('/{message}/balas', [NotificationController::class, 'reply'])->name('reply');
     });
 
     // ---- Admin Teknis ----

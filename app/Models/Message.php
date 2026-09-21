@@ -7,11 +7,12 @@ use Illuminate\Database\Eloquent\Model;
 class Message extends Model
 {
     protected $fillable = [
-        'psychologist_id', 'student_id', 'screening_id', 'body', 'is_read',
+        'psychologist_id', 'student_id', 'screening_id', 'body', 'is_read', 'is_from_student',
     ];
 
     protected $casts = [
         'is_read' => 'boolean',
+        'is_from_student' => 'boolean',
     ];
 
     public function psychologist()

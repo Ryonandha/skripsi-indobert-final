@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Psikolog;
 use App\Http\Controllers\Controller;
 use App\Mail\CounselingScheduledMail;
 use App\Mail\PsychologistMessageMail;
+use App\Models\Message;
 use App\Models\Screening;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -56,7 +57,15 @@ class PsikologController extends Controller
             ->take(5)
             ->get();
 
-        return view('psikolog.dashboard', compact('stats', 'urgentCases'));
+        // Balasan pesan belum dibaca dari mahasiswa
+        $studentReplies = Message::where('is_from_student', true)
+            ->where('is_read', false)
+            ->with('student')
+            ->latest()
+            ->take(5)
+            ->get();
+
+        return view('psikolog.dashboard', compact('stats', 'urgentCases', 'studentReplies'));
     }
 
     /**
@@ -116,7 +125,19 @@ class PsikologController extends Controller
             ->latest()
             ->first();
 
-        return view('psikolog.patient-detail', compact('student', 'screenings', 'latestConsent', 'latestScreening'));
+        // Riwayat percakapan antara mahasiswa dan psikolog
+        $messages = Message::where('student_id', $student->id)
+            ->with('psychologist')
+            ->orderBy('created_at', 'asc')
+            ->get();
+
+        // Tandai balasan mahasiswa sebagai dibaca oleh psikolog
+        Message::where('student_id', $student->id)
+            ->where('is_from_student', true)
+            ->where('is_read', false)
+            ->update(['is_read' => true]);
+
+        return view('psikolog.patient-detail', compact('student', 'screenings', 'latestConsent', 'latestScreening', 'messages'));
     }
 
     /**
