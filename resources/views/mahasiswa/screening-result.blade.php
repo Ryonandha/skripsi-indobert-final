@@ -1,4 +1,4 @@
-@extends('layouts.app')
+﻿@extends('layouts.app')
 @section('title', 'Hasil Skrining')
 
 @php
@@ -17,7 +17,7 @@
     <div class="mb-6 flex items-end justify-between gap-4">
         <div>
             <h1 class="font-display text-2xl font-bold text-calm-900">Hasil Skrining</h1>
-            <p class="text-sm text-calm-500 mt-1">Diperiksa {{ $screening->created_at->format('d F Y, H:i') }} WIB</p>
+            <p class="text-sm text-calm-500 mt-1">Diperiksa {{ $screening->created_at->setTimezone('Asia/Jakarta')->format('d F Y, H:i') }} WIB</p>
         </div>
         <div class="no-print flex items-center gap-2 flex-shrink-0">
             <button onclick="window.print()"

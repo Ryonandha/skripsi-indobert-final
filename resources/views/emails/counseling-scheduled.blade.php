@@ -77,7 +77,7 @@
                             {{-- CTA Button --}}
                             <table cellpadding="0" cellspacing="0" style="margin:0 auto;">
                                 <tr>
-                                    <td style="background-color:#0d9488; border-radius:12px;">
+                                    <td style="background-color:#0284c7; border-radius:12px;">
                                         <a href="{{ route('mahasiswa.notifikasi.index') }}"
                                            style="display:inline-block; padding:12px 28px; color:#ffffff; text-decoration:none; font-size:14px; font-weight:600;">
                                             Lihat di Aplikasi →
@@ -92,8 +92,8 @@
                     <tr>
                         <td style="padding:20px 32px; background-color:#f8fafc; border-top:1px solid #e2e8f0; text-align:center;">
                             <p style="margin:0; color:#94a3b8; font-size:12px; line-height:1.5;">
-                                Email ini dikirim otomatis oleh {{ config('app.name') }}.<br>
-                                Jangan balas email ini — gunakan aplikasi untuk merespons.
+                                Email ini dikirim oleh sistem {{ config('app.name') }} — Sistem Skrining Kecemasan Mahasiswa<br>
+                                STIKOM Yos Sudarso Purwokerto
                             </p>
                         </td>
                     </tr>

@@ -1,4 +1,4 @@
-@extends('layouts.app')
+﻿@extends('layouts.app')
 @section('title', 'Dashboard')
 
 @section('content')
@@ -72,7 +72,7 @@
                         <span class="badge-{{ $latest->risk_level === 'tinggi' ? 'high' : ($latest->risk_level === 'sedang' ? 'med' : 'low') }}">
                             Risiko {{ ucfirst($latest->risk_level) }}
                         </span>
-                        <span class="text-xs text-slate-400">{{ $latest->created_at->format('d M Y · H:i') }}</span>
+                        <span class="text-xs text-slate-400">{{ $latest->created_at->setTimezone('Asia/Jakarta')->format('d M Y · H:i') }}</span>
                     </div>
                     <div class="grid grid-cols-2 gap-3">
                         <div class="rounded-lg border border-slate-100 bg-slate-50 p-4">

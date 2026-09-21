@@ -1,4 +1,4 @@
-@extends('layouts.app')
+﻿@extends('layouts.app')
 @section('title', 'Riwayat Skrining')
 
 @section('content')
@@ -31,7 +31,7 @@
                         $rc = ['rendah' => 'text-primary-700 bg-primary-50', 'sedang' => 'text-warm-700 bg-warm-50', 'tinggi' => 'text-danger-700 bg-danger-50'][$s->risk_level] ?? 'text-calm-700 bg-calm-50';
                     @endphp
                     <tr class="border-t border-calm-100 hover:bg-calm-50/50">
-                        <td class="p-3 text-calm-700">{{ $s->created_at->format('d M Y, H:i') }}</td>
+                        <td class="p-3 text-calm-700">{{ $s->created_at->setTimezone('Asia/Jakarta')->format('d M Y, H:i') }}</td>
                         <td class="p-3 text-calm-800">
                             {{ $s->emotion_label }}
                             <span class="text-calm-400 text-xs ml-1">({{ number_format($s->emotion_confidence * 100, 1) }}%)</span>

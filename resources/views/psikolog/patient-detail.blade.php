@@ -1,4 +1,4 @@
-@extends('layouts.app')
+﻿@extends('layouts.app')
 @section('title', 'Detail Pasien')
 
 @section('content')
@@ -23,7 +23,7 @@
                         @if($student->phone)
                             <span class="px-3 py-1 bg-calm-100 text-calm-700 rounded-full">{{ $student->phone }}</span>
                         @endif
-                        <span class="px-3 py-1 bg-primary-100 text-primary-700 rounded-full">Terdaftar: {{ $student->created_at->format('d M Y') }}</span>
+                        <span class="px-3 py-1 bg-primary-100 text-primary-700 rounded-full">Terdaftar: {{ $student->created_at->setTimezone('Asia/Jakarta')->format('d M Y') }}</span>
                     </div>
                 </div>
             </div>
@@ -80,7 +80,7 @@
                                     <span class="font-display font-semibold text-sm capitalize">{{ $s->risk_level }}</span>
                                 </div>
                                 <div>
-                                    <p class="font-semibold text-calm-900">{{ $s->created_at->format('d M Y H:i') }}</p>
+                                    <p class="font-semibold text-calm-900">{{ $s->created_at->setTimezone('Asia/Jakarta')->format('d M Y H:i') }}</p>
                                     <p class="text-sm text-calm-500">Emosi: {{ $s->emotion_label }} ({{ number_format($s->emotion_confidence*100,0) }}%) • HARS: {{ $s->hars_score }}/56</p>
                                 </div>
                             </div>
@@ -104,7 +104,7 @@
                         @if($s->handling_notes)
                             <div class="mt-4 ml-4 pl-4 border-l-2 border-calm-200">
                                 <p class="text-sm text-calm-600">{{ $s->handling_notes }}</p>
-                                <p class="text-xs text-calm-400 mt-1">Oleh: {{ $s->handler->name ?? '—' }} • {{ $s->updated_at->format('d M Y H:i') }}</p>
+                                <p class="text-xs text-calm-400 mt-1">Oleh: {{ $s->handler->name ?? '—' }} • {{ $s->updated_at->setTimezone('Asia/Jakarta')->format('d M Y H:i') }}</p>
                             </div>
                         @endif
                     </div>

@@ -1,4 +1,4 @@
-@extends('layouts.app')
+﻿@extends('layouts.app')
 @section('title', 'Notifikasi')
 
 @section('content')
@@ -44,7 +44,7 @@
                         </div>
                         <p class="text-calm-700 text-sm mt-1.5 whitespace-pre-line">{{ $msg->body }}</p>
                         <div class="flex items-center gap-3 mt-3">
-                            <span class="text-xs text-calm-400">{{ $msg->created_at->format('d M Y H:i') }} WIB</span>
+                            <span class="text-xs text-calm-400">{{ $msg->created_at->setTimezone('Asia/Jakarta')->format('d M Y H:i') }} WIB</span>
                             @if($msg->screening && $msg->screening->user_id === auth()->id())
                                 <a href="{{ route('mahasiswa.screening.show', $msg->screening) }}" class="text-xs font-medium text-primary-600 hover:text-primary-700">Lihat skrining terkait →</a>
                             @endif

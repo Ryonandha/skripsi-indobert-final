@@ -1,4 +1,4 @@
-@extends('layouts.app')
+﻿@extends('layouts.app')
 @section('title', 'Detail Skrining Pasien')
 
 @php
@@ -26,7 +26,7 @@
         <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
             <div>
                 <h1 class="font-display text-2xl font-bold text-calm-900">Hasil Skrining</h1>
-                <p class="text-sm text-calm-500 mt-1">{{ $screening->created_at->format('d F Y, H:i') }} WIB</p>
+                <p class="text-sm text-calm-500 mt-1">{{ $screening->created_at->setTimezone('Asia/Jakarta')->format('d F Y, H:i') }} WIB</p>
             </div>
             <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border text-sm font-medium w-fit {{ $r['bg'] }} {{ $r['text'] }} {{ $r['border'] }}">
                 <span class="w-2 h-2 rounded-full {{ $r['dot'] }}"></span>

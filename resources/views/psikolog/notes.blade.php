@@ -1,4 +1,4 @@
-@extends('layouts.app')
+﻿@extends('layouts.app')
 @section('title', 'Catatan Progres')
 
 @section('content')
@@ -68,7 +68,7 @@
                                 <p class="text-sm text-calm-900">{{ $s->handler->name ?? '—' }}</p>
                             </td>
                             <td class="py-4 px-4">
-                                <p class="text-sm text-calm-500">{{ $s->updated_at->format('d M Y H:i') }}</p>
+                                <p class="text-sm text-calm-500">{{ $s->updated_at->setTimezone('Asia/Jakarta')->format('d M Y H:i') }}</p>
                             </td>
                         </tr>
                     @empty
