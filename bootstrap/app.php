@@ -12,7 +12,19 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        $middleware->trustProxies(at: '*');
+        // Percayai semua proxy (Azure Load Balancer, Cloudflare, dll.)
+        // dan baca SEMUA header forwarded agar Laravel tahu:
+        // - Scheme asli (HTTPS) lewat X-Forwarded-Proto
+        // - Host asli (sipekacare.my.id) lewat X-Forwarded-Host
+        // - IP asli user lewat X-Forwarded-For
+        $middleware->trustProxies(
+            at: '*',
+            headers: Request::HEADER_X_FORWARDED_FOR
+                | Request::HEADER_X_FORWARDED_HOST
+                | Request::HEADER_X_FORWARDED_PORT
+                | Request::HEADER_X_FORWARDED_PROTO
+                | Request::HEADER_X_FORWARDED_PREFIX,
+        );
         $middleware->alias([
             'role' => \App\Http\Middleware\EnsureUserHasRole::class,
         ]);

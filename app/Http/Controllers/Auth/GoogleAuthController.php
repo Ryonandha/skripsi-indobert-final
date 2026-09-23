@@ -30,20 +30,31 @@ use Laravel\Socialite\Facades\Socialite;
  */
 class GoogleAuthController extends Controller
 {
+    /**
+     * Bangun callback URL dari host yang sedang diakses user.
+     * Ini memastikan URL cocok apakah user akses via sipekacare.my.id
+     * maupun langsung via URL Azure — keduanya terdaftar di Google Console.
+     */
+    private function buildCallbackUrl(): string
+    {
+        // Dengan trustProxies yang sudah dikonfigurasi (termasuk X-Forwarded-Host),
+        // request()->getSchemeAndHttpHost() akan mengembalikan host asli
+        // (sipekacare.my.id) bukan host internal Azure (127.0.0.1).
+        $host = request()->getSchemeAndHttpHost();
+
+        // Jika karena alasan tertentu host masih HTTP (lokal/testing), biarkan.
+        // Di produksi (Azure + custom domain) pasti HTTPS.
+        return rtrim($host, '/') . '/auth/google/callback';
+    }
+
     public function redirect()
     {
-        // Bangun redirect URI dari APP_URL agar selalu cocok dengan env
-        // yang dikonfigurasi di Azure — tidak perlu GOOGLE_REDIRECT_URI terpisah.
-        $callbackUrl = rtrim(config('app.url'), '/') . '/auth/google/callback';
+        $callbackUrl = $this->buildCallbackUrl();
 
-        // Jika APP_URL pakai HTTPS, pastikan URL callback juga HTTPS.
-        // (Azure Container Apps mengakhiri TLS di load balancer, Apache di
-        // dalam container menerima HTTP — Laravel perlu dipaksa HTTPS
-        // lewat forceScheme agar URL yang digenerate cocok dengan redirect URI
-        // yang didaftarkan di Google Cloud Console.)
-        if (str_starts_with($callbackUrl, 'https://')) {
-            \URL::forceScheme('https');
-        }
+        \Illuminate\Support\Facades\Log::info('Google OAuth redirect', [
+            'callback_url' => $callbackUrl,
+            'request_host' => request()->getSchemeAndHttpHost(),
+        ]);
 
         return Socialite::driver('google')
             ->with(['hd' => config('services.google.allowed_domain')])
@@ -53,20 +64,22 @@ class GoogleAuthController extends Controller
 
     public function callback(Request $request)
     {
-        // Gunakan callback URL yang sama persis dengan yang dipakai di redirect()
-        $callbackUrl = rtrim(config('app.url'), '/') . '/auth/google/callback';
-        if (str_starts_with($callbackUrl, 'https://')) {
-            \URL::forceScheme('https');
-        }
+        $callbackUrl = $this->buildCallbackUrl();
+
+        \Illuminate\Support\Facades\Log::info('Google OAuth callback', [
+            'callback_url' => $callbackUrl,
+            'request_host' => $request->getSchemeAndHttpHost(),
+        ]);
 
         try {
             $googleUser = Socialite::driver('google')
                 ->redirectUrl($callbackUrl)
                 ->user();
         } catch (\Exception $e) {
-            \Illuminate\Support\Facades\Log::error('Google OAuth error: ' . $e->getMessage(), [
-                'exception' => $e,
+            \Illuminate\Support\Facades\Log::error('Google OAuth error', [
+                'message'      => $e->getMessage(),
                 'callback_url' => $callbackUrl,
+                'request_url'  => $request->fullUrl(),
             ]);
             return redirect()->route('login')->withErrors(
                 ['email' => 'Login Google gagal: ' . $e->getMessage()]
