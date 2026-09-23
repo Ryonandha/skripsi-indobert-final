@@ -32,20 +32,41 @@ class GoogleAuthController extends Controller
 {
     public function redirect()
     {
-        // 'hd' = hint agar pemilih akun Google default ke domain kampus.
-        // Penegakan sesungguhnya tetap di callback() di bawah.
+        // Bangun redirect URI dari APP_URL agar selalu cocok dengan env
+        // yang dikonfigurasi di Azure — tidak perlu GOOGLE_REDIRECT_URI terpisah.
+        $callbackUrl = rtrim(config('app.url'), '/') . '/auth/google/callback';
+
+        // Jika APP_URL pakai HTTPS, pastikan URL callback juga HTTPS.
+        // (Azure Container Apps mengakhiri TLS di load balancer, Apache di
+        // dalam container menerima HTTP — Laravel perlu dipaksa HTTPS
+        // lewat forceScheme agar URL yang digenerate cocok dengan redirect URI
+        // yang didaftarkan di Google Cloud Console.)
+        if (str_starts_with($callbackUrl, 'https://')) {
+            \URL::forceScheme('https');
+        }
+
         return Socialite::driver('google')
             ->with(['hd' => config('services.google.allowed_domain')])
+            ->redirectUrl($callbackUrl)
             ->redirect();
     }
 
     public function callback(Request $request)
     {
+        // Gunakan callback URL yang sama persis dengan yang dipakai di redirect()
+        $callbackUrl = rtrim(config('app.url'), '/') . '/auth/google/callback';
+        if (str_starts_with($callbackUrl, 'https://')) {
+            \URL::forceScheme('https');
+        }
+
         try {
-            $googleUser = Socialite::driver('google')->user();
+            $googleUser = Socialite::driver('google')
+                ->redirectUrl($callbackUrl)
+                ->user();
         } catch (\Exception $e) {
             \Illuminate\Support\Facades\Log::error('Google OAuth error: ' . $e->getMessage(), [
                 'exception' => $e,
+                'callback_url' => $callbackUrl,
             ]);
             return redirect()->route('login')->withErrors(
                 ['email' => 'Login Google gagal: ' . $e->getMessage()]
